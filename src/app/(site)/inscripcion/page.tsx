@@ -1,7 +1,8 @@
 import { Metadata } from "next";
 import Hero from "@/components/sections/Hero";
 import SectionHeading from "@/components/ui/SectionHeading";
-import EnrollmentForm from "@/components/ui/EnrollmentForm";
+import ApplicationForm from "@/components/inscripcion/ApplicationForm";
+import { createClient } from "@/lib/supabase/server";
 import { siteConfig } from "@/data/site";
 import {
   ClipboardList,
@@ -27,16 +28,16 @@ const steps = [
       "Completa el formulario de inscripción con tu información personal y académica.",
   },
   {
+    icon: FileText,
+    title: "Sube tus Documentos",
+    description:
+      "Adjunta los documentos requeridos directamente desde tu dispositivo.",
+  },
+  {
     icon: CheckCircle2,
     title: "Recibe Confirmación",
     description:
       "Nuestro equipo revisará tu solicitud y te contactará para confirmar tu inscripción.",
-  },
-  {
-    icon: FileText,
-    title: "Entrega Documentos",
-    description:
-      "Presenta la documentación requerida en nuestras instalaciones para formalizar tu registro.",
   },
   {
     icon: GraduationCap,
@@ -46,7 +47,15 @@ const steps = [
   },
 ];
 
-export default function InscripcionPage() {
+export default async function InscripcionPage() {
+  // Fetch active required documents from Supabase
+  const supabase = createClient();
+  const { data: requiredDocuments } = await supabase
+    .from("required_documents")
+    .select("*")
+    .eq("activo", true)
+    .order("created_at", { ascending: true });
+
   return (
     <>
       <Hero
@@ -92,7 +101,7 @@ export default function InscripcionPage() {
                 subtitle="Agradecemos que por favor nos proporciones tu información completa para poder darte un mejor servicio."
                 centered={false}
               />
-              <EnrollmentForm />
+              <ApplicationForm requiredDocuments={requiredDocuments ?? []} />
             </div>
 
             <div className="lg:col-span-1">
