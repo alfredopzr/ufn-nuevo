@@ -1,162 +1,134 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import Link from "next/link";
-import { Instagram, Facebook, ArrowRight } from "lucide-react";
+import { Instagram, Facebook, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import SectionHeading from "@/components/ui/SectionHeading";
 import {
   instagramPosts,
-  facebookPosts,
+  facebookEmbeds,
   instagramProfileUrl,
   facebookProfileUrl,
 } from "@/data/social-feed";
 
-declare global {
-  interface Window {
-    instgrm?: {
-      Embeds: {
-        process: () => void;
-      };
-    };
-    FB?: {
-      XFBML: {
-        parse: (element?: HTMLElement) => void;
-      };
-    };
-  }
+function igEmbedUrl(postUrl: string) {
+  const clean = postUrl.replace(/\?.*$/, "").replace(/\/+$/, "");
+  return `${clean}/embed/captioned/`;
 }
 
-function loadScript(src: string, onLoad: () => void) {
-  const existing = document.querySelector(`script[src="${src}"]`);
-  if (existing) {
-    onLoad();
-    return;
-  }
-  const script = document.createElement("script");
-  script.src = src;
-  script.async = true;
-  script.addEventListener("load", onLoad);
-  document.body.appendChild(script);
+const IG_CARD_WIDTH = 300;
+const IG_CARD_HEIGHT = 430;
+
+function Carousel({
+  children,
+  label,
+}: {
+  children: React.ReactNode;
+  label: string;
+}) {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scroll = (direction: "left" | "right") => {
+    if (!scrollRef.current) return;
+    const cardWidth = scrollRef.current.firstElementChild?.clientWidth ?? 320;
+    const amount = cardWidth + 32;
+    scrollRef.current.scrollBy({
+      left: direction === "left" ? -amount : amount,
+      behavior: "smooth",
+    });
+  };
+
+  return (
+    <div className="relative group">
+      <div
+        ref={scrollRef}
+        aria-label={label}
+        className="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-4 -mb-4"
+        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+      >
+        {children}
+      </div>
+
+      <button
+        onClick={() => scroll("left")}
+        className="hidden md:flex absolute -left-5 top-1/2 -translate-y-1/2 z-10 h-10 w-10 items-center justify-center rounded-full bg-background border shadow-md opacity-0 group-hover:opacity-100 transition-opacity hover:bg-muted"
+        aria-label="Anterior"
+      >
+        <ChevronLeft className="h-5 w-5" />
+      </button>
+      <button
+        onClick={() => scroll("right")}
+        className="hidden md:flex absolute -right-5 top-1/2 -translate-y-1/2 z-10 h-10 w-10 items-center justify-center rounded-full bg-background border shadow-md opacity-0 group-hover:opacity-100 transition-opacity hover:bg-muted"
+        aria-label="Siguiente"
+      >
+        <ChevronRight className="h-5 w-5" />
+      </button>
+    </div>
+  );
 }
 
 export default function SocialFeed() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [igReady, setIgReady] = useState(false);
-  const [fbReady, setFbReady] = useState(false);
-
   const hasInstagram = instagramPosts.length > 0;
-  const hasFacebook = facebookPosts.length > 0;
-
-  useEffect(() => {
-    if (hasInstagram) {
-      loadScript("https://www.instagram.com/embed.js", () => {
-        setIgReady(true);
-        window.instgrm?.Embeds.process();
-      });
-    }
-    if (hasFacebook) {
-      loadScript(
-        "https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v18.0",
-        () => {
-          setFbReady(true);
-          window.FB?.XFBML.parse();
-        }
-      );
-    }
-  }, [hasInstagram, hasFacebook]);
-
-  useEffect(() => {
-    if (igReady && window.instgrm) {
-      window.instgrm.Embeds.process();
-    }
-  }, [igReady]);
-
-  useEffect(() => {
-    if (fbReady && window.FB) {
-      window.FB.XFBML.parse();
-    }
-  }, [fbReady]);
+  const hasFacebook = facebookEmbeds.length > 0;
 
   if (!hasInstagram && !hasFacebook) return null;
 
   return (
-    <section className="py-16 md:py-24 bg-background">
+    <section className="py-16 md:py-24 bg-muted/40">
       <div className="container mx-auto px-4">
         <SectionHeading
           title="Síguenos en Redes"
           subtitle="Mantente al día con las novedades de la Universidad Frontera Norte"
         />
 
-        <div
-          ref={containerRef}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
-        >
-          {instagramPosts.map((postUrl) => (
-            <div
-              key={postUrl}
-              className="flex justify-center max-w-[360px] mx-auto w-full"
-            >
-              <blockquote
-                className="instagram-media"
-                data-instgrm-permalink={postUrl}
-                data-instgrm-version="14"
-                style={{
-                  background: "#FFF",
-                  border: 0,
-                  borderRadius: "3px",
-                  boxShadow:
-                    "0 0 1px 0 rgba(0,0,0,0.5), 0 1px 10px 0 rgba(0,0,0,0.15)",
-                  margin: "0",
-                  maxWidth: "540px",
-                  minWidth: "260px",
-                  padding: 0,
-                  width: "100%",
-                }}
-              >
-                <div className="p-4 text-center">
-                  <Instagram className="w-8 h-8 mx-auto text-muted-foreground mb-2" />
-                  <a
-                    href={postUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm text-primary hover:underline"
-                  >
-                    Ver publicación en Instagram
-                  </a>
-                </div>
-              </blockquote>
+        {/* Instagram */}
+        {hasInstagram && (
+          <div className={hasFacebook ? "mb-12" : ""}>
+            <div className="flex items-center gap-2 mb-6">
+              <Instagram className="h-5 w-5 text-pink-500" />
+              <h3 className="text-lg font-semibold">Instagram</h3>
             </div>
-          ))}
-
-          {facebookPosts.map((postUrl) => (
-            <div
-              key={postUrl}
-              className="flex justify-center max-w-[360px] mx-auto w-full"
-            >
-              <div
-                className="fb-post"
-                data-href={postUrl}
-                data-width="360"
-                data-show-text="true"
-              >
-                <div className="p-4 text-center">
-                  <Facebook className="w-8 h-8 mx-auto text-muted-foreground mb-2" />
-                  <a
-                    href={postUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm text-primary hover:underline"
-                  >
-                    Ver publicación en Facebook
-                  </a>
+            <Carousel label="Publicaciones de Instagram">
+              {instagramPosts.map((postUrl) => (
+                <div
+                  key={postUrl}
+                  className="snap-start shrink-0 rounded-xl bg-background shadow-sm border overflow-hidden"
+                  style={{ width: IG_CARD_WIDTH, height: IG_CARD_HEIGHT }}
+                >
+                  <iframe
+                    src={igEmbedUrl(postUrl)}
+                    className="w-full border-0"
+                    style={{ marginTop: "-54px", height: "calc(100% + 54px)" }}
+                    loading="lazy"
+                    title="Publicación de Instagram"
+                  />
                 </div>
-              </div>
-            </div>
-          ))}
-        </div>
+              ))}
+            </Carousel>
+          </div>
+        )}
 
-        <div className="mt-10 flex flex-wrap justify-center gap-4">
+        {/* Facebook */}
+        {hasFacebook && (
+          <div>
+            <div className="flex items-center gap-2 mb-6">
+              <Facebook className="h-5 w-5 text-blue-600" />
+              <h3 className="text-lg font-semibold">Facebook</h3>
+            </div>
+            <Carousel label="Publicaciones de Facebook">
+              {facebookEmbeds.map((embedHtml, i) => (
+                <div
+                  key={i}
+                  className="snap-start shrink-0 rounded-xl shadow-sm border [&>iframe]:block h-full"
+                  dangerouslySetInnerHTML={{ __html: embedHtml }}
+                />
+              ))}
+            </Carousel>
+          </div>
+        )}
+
+        <div className="mt-12 flex flex-wrap justify-center gap-4">
           {hasInstagram && (
             <Button asChild variant="outline" size="lg" className="text-base">
               <Link
