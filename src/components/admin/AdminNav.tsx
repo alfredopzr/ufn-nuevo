@@ -34,6 +34,18 @@ export default function AdminNav({ userEmail }: Props) {
             >
               Solicitudes
             </Link>
+            <Link
+              href="/admin/noticias"
+              className="rounded-md px-3 py-1.5 text-sm font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
+            >
+              Noticias
+            </Link>
+            <Link
+              href="/admin/fechas"
+              className="rounded-md px-3 py-1.5 text-sm font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
+            >
+              Fechas
+            </Link>
           </nav>
         </div>
         <div className="flex items-center gap-4">

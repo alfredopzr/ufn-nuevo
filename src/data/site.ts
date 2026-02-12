@@ -36,6 +36,7 @@ export const navigation: NavItem[] = [
   { label: "Carreras", href: "/carreras" },
   { label: "Inscripción", href: "/inscripcion" },
   { label: "Noticias", href: "/noticias" },
+  { label: "FAQ", href: "/preguntas-frecuentes" },
   { label: "Contacto", href: "/contacto" },
 ];
 

@@ -6,6 +6,8 @@ import SectionHeading from "@/components/ui/SectionHeading";
 import ProgramCard from "@/components/ui/ProgramCard";
 import { getProgramsByCategory } from "@/data/programs";
 import { siteConfig } from "@/data/site";
+import SocialFeed from "@/components/sections/SocialFeed";
+import FechasImportantes from "@/components/sections/FechasImportantes";
 import {
   GraduationCap,
   Users,
@@ -55,6 +57,9 @@ export default function HomePage() {
       />
 
       <StatsBar />
+
+      {/* Fechas Importantes Section */}
+      <FechasImportantes />
 
       {/* Programs Section */}
       <section className="py-16 md:py-24 bg-background">
@@ -114,6 +119,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Social Feed Section */}
+      <SocialFeed />
 
       {/* CTA Section */}
       <section className="py-16 md:py-24 bg-primary text-primary-foreground">

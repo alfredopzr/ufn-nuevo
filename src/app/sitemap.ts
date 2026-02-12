@@ -10,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/inscripcion",
     "/noticias",
     "/contacto",
+    "/preguntas-frecuentes",
   ];
 
   const programPages = programs.map((p) => `/carreras/${p.slug}`);

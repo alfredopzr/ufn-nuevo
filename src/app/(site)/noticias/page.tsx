@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import Hero from "@/components/sections/Hero";
 import NewsCard from "@/components/ui/NewsCard";
-import { newsArticles } from "@/data/news";
+import { createClient } from "@/lib/supabase/server";
 
 export const metadata: Metadata = {
   title: "Noticias y Eventos",
@@ -9,7 +9,26 @@ export const metadata: Metadata = {
     "Mantente informado sobre las últimas noticias, eventos y actividades de la Universidad Frontera Norte en Reynosa.",
 };
 
-export default function NoticiasPage() {
+export const revalidate = 60; // revalidate every 60 seconds
+
+export default async function NoticiasPage() {
+  const supabase = createClient();
+  const { data: noticias } = await supabase
+    .from("noticias")
+    .select("*")
+    .eq("publicado", true)
+    .order("fecha", { ascending: false });
+
+  // Map to NewsCard's expected format
+  const articles = (noticias ?? []).map((n) => ({
+    slug: n.slug,
+    title: n.titulo,
+    date: n.fecha,
+    excerpt: n.extracto,
+    category: n.categoria,
+    content: n.contenido,
+  }));
+
   return (
     <>
       <Hero
@@ -19,9 +38,9 @@ export default function NoticiasPage() {
 
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4">
-          {newsArticles.length > 0 ? (
+          {articles.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {newsArticles.map((article) => (
+              {articles.map((article) => (
                 <NewsCard key={article.slug} article={article} />
               ))}
             </div>

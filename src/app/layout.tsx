@@ -15,6 +15,17 @@ export const metadata: Metadata = {
       "Universidad Frontera Norte — Carreras Universitarias en Reynosa",
   },
   description: siteConfig.description,
+  metadataBase: new URL("https://cesfn.edu.mx"),
+  openGraph: {
+    type: "website",
+    locale: "es_MX",
+    siteName: "Universidad Frontera Norte",
+    title: "Universidad Frontera Norte — Carreras Universitarias en Reynosa",
+    description: siteConfig.description,
+  },
+  twitter: {
+    card: "summary_large_image",
+  },
 };
 
 export default function RootLayout({

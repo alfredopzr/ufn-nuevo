@@ -19,6 +19,7 @@ import {
   GraduationCap,
   Briefcase,
   ArrowLeft,
+  MessageCircle,
 } from "lucide-react";
 
 export function generateStaticParams() {
@@ -35,6 +36,11 @@ export function generateMetadata({
   return {
     title: program.name,
     description: program.description,
+    openGraph: {
+      title: `${program.name} | Universidad Frontera Norte`,
+      description: program.description,
+      type: "website",
+    },
   };
 }
 
@@ -248,6 +254,17 @@ export default function ProgramDetailPage({
 
                 <Button asChild variant="outline" size="lg" className="w-full">
                   <Link href="/contacto">Solicitar Información</Link>
+                </Button>
+
+                <Button asChild variant="outline" size="lg" className="w-full border-green-500 text-green-600 hover:bg-green-50">
+                  <Link
+                    href={`https://wa.me/528991604645?text=${encodeURIComponent(`Hola, me interesa la carrera de ${program.name}. ¿Podrían darme más información?`)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <MessageCircle className="mr-2 h-5 w-5" />
+                    Consultar por WhatsApp
+                  </Link>
                 </Button>
               </div>
             </div>

@@ -70,3 +70,25 @@ export interface ApplicationWithAll extends ApplicationWithDocuments {
   communications: Communication[];
 }
 
+export interface Noticia {
+  id: string;
+  titulo: string;
+  slug: string;
+  fecha: string;
+  extracto: string;
+  categoria: string;
+  contenido: string;
+  publicado: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface FechaImportante {
+  id: string;
+  titulo: string;
+  fecha: string;
+  descripcion: string | null;
+  activo: boolean;
+  created_at: string;
+}
+
