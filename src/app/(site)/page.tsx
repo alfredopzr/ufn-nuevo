@@ -141,7 +141,7 @@ export default function HomePage() {
               asChild
               size="lg"
               variant="outline"
-              className="text-base border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10"
+              className="text-base border-primary-foreground/50 bg-transparent text-primary-foreground hover:bg-primary-foreground/10 hover:border-primary-foreground"
             >
               <Link href="/carreras">Ver Carreras</Link>
             </Button>
