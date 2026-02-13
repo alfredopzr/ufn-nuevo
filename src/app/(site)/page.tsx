@@ -8,6 +8,8 @@ import { getProgramsByCategory } from "@/data/programs";
 import { siteConfig } from "@/data/site";
 import SocialFeed from "@/components/sections/SocialFeed";
 import FechasImportantes from "@/components/sections/FechasImportantes";
+import Testimonials from "@/components/sections/Testimonials";
+import CampusGallery from "@/components/sections/CampusGallery";
 import {
   GraduationCap,
   Users,
@@ -54,6 +56,7 @@ export default function HomePage() {
         subtitle="Universidad Frontera Norte — Reynosa, Tamaulipas, México"
         ctaText="Inscríbete Ahora"
         ctaHref="/inscripcion"
+        backgroundImage="/images/hero/hero-campus.jpg"
       />
 
       <StatsBar />
@@ -105,13 +108,13 @@ export default function HomePage() {
             {features.map((feature) => (
               <div
                 key={feature.title}
-                className="text-center p-6 rounded-lg bg-background shadow-sm"
+                className="text-center p-6 rounded-lg bg-background shadow-sm border-t-2 border-primary transition-all duration-200 hover:-translate-y-1 hover:shadow-md"
               >
                 <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-primary/10 text-primary mb-4">
                   <feature.icon className="w-7 h-7" />
                 </div>
                 <h4 className="font-semibold text-lg mb-2">{feature.title}</h4>
-                <p className="text-muted-foreground text-sm">
+                <p className="text-muted-foreground text-sm leading-relaxed">
                   {feature.description}
                 </p>
               </div>
@@ -119,6 +122,12 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Testimonials Section */}
+      <Testimonials />
+
+      {/* Campus Gallery Section */}
+      <CampusGallery />
 
       {/* Social Feed Section */}
       <SocialFeed />

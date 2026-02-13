@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu } from "lucide-react";
+import { Menu, GraduationCap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -39,6 +39,7 @@ export default function Header() {
       <div className="container mx-auto flex h-16 items-center justify-between px-4 lg:px-8">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
+          <GraduationCap className="h-8 w-8 text-primary" />
           <span className="text-lg font-semibold text-primary sm:text-xl">
             Universidad Frontera Norte
           </span>

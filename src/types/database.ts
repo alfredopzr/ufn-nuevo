@@ -92,3 +92,12 @@ export interface FechaImportante {
   created_at: string;
 }
 
+export interface NoticiaEnvio {
+  id: string;
+  noticia_id: string;
+  filtros: { programa?: string; status?: string };
+  total_destinatarios: number;
+  enviado_por: string;
+  created_at: string;
+}
+

@@ -8,6 +8,7 @@ export const programs: Program[] = [
     shortName: "Administración de Empresas",
     category: "licenciatura",
     icon: "Briefcase",
+    image: "/images/programs/administracion.jpg",
     duration: "9 Cuatrimestres",
     description:
       "Formar líderes administrativos con conocimientos conceptuales y prácticos para gestionar recursos eficientemente y formular estrategias competitivas con ética profesional.",
@@ -126,6 +127,7 @@ export const programs: Program[] = [
     shortName: "Comercio Internacional",
     category: "licenciatura",
     icon: "Globe",
+    image: "/images/programs/comercio-internacional.jpg",
     duration: "9 Cuatrimestres",
     description:
       "Formar expertos en comercio internacional capaces de analizar mercados, negociar en contextos multiculturales, manejar logística y operaciones aduaneras, con un enfoque emprendedor y socialmente responsable.",
@@ -247,6 +249,7 @@ export const programs: Program[] = [
     shortName: "Logística",
     category: "licenciatura",
     icon: "Truck",
+    image: "/images/programs/logistica.jpg",
     duration: "9 Cuatrimestres",
     description:
       "Formar expertos en logística con habilidades en administración, finanzas, y comercio internacional, aptos para identificar oportunidades de mercado y gestionar operaciones de importación-exportación con un enfoque multicultural.",
@@ -370,6 +373,7 @@ export const programs: Program[] = [
     shortName: "Industrial Administrativa",
     category: "ingenieria",
     icon: "Factory",
+    image: "/images/programs/industrial.jpg",
     duration: "9 Cuatrimestres",
     description:
       "Formar ingenieros con excelencia en competencias profesionales, enfocados en la planeación y operación de sistemas de producción y recursos humanos.",
@@ -493,6 +497,7 @@ export const programs: Program[] = [
     shortName: "Sistemas Computacionales",
     category: "ingenieria",
     icon: "Monitor",
+    image: "/images/programs/sistemas.jpg",
     duration: "9 Cuatrimestres",
     description:
       "Formar ingenieros excelentes en competencias profesionales y personales, enfocados en desarrollar, implementar y automatizar sistemas tecnológicos, con una visión emprendedora y sustentable.",
@@ -610,6 +615,7 @@ export const programs: Program[] = [
     shortName: "Electrónica Industrial",
     category: "ingenieria",
     icon: "Cpu",
+    image: "/images/programs/electronica.jpg",
     duration: "9 Cuatrimestres",
     description:
       "Formar ingenieros excelentes en su campo, con un enfoque emprendedor, ético y social. Capacitar para identificar y explotar oportunidades empresariales.",

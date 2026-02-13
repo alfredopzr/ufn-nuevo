@@ -10,6 +10,7 @@ export interface Program {
   duration: string;
   semesters: Semester[];
   icon: string;
+  image?: string;
 }
 
 export interface Semester {

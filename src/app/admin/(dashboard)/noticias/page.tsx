@@ -6,12 +6,14 @@ import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import type { Noticia } from "@/types/database";
-import { Plus, Pencil, Trash2 } from "lucide-react";
+import { Plus, Pencil, Trash2, Mail } from "lucide-react";
+import SendNoticiaEmailDialog from "@/components/admin/SendNoticiaEmailDialog";
 
 export default function AdminNoticiasPage() {
   const supabase = createClient();
   const [noticias, setNoticias] = useState<Noticia[]>([]);
   const [loading, setLoading] = useState(true);
+  const [emailNoticia, setEmailNoticia] = useState<Noticia | null>(null);
 
   async function fetchNoticias() {
     const { data } = await supabase
@@ -101,6 +103,17 @@ export default function AdminNoticiasPage() {
                     </td>
                     <td className="px-4 py-3">
                       <div className="flex items-center justify-end gap-2">
+                        {noticia.publicado && (
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => setEmailNoticia(noticia)}
+                            className="text-blue-600 hover:text-blue-700 hover:bg-blue-50"
+                            title="Enviar por email"
+                          >
+                            <Mail className="h-4 w-4" />
+                          </Button>
+                        )}
                         <Button variant="ghost" size="sm" asChild>
                           <Link href={`/admin/noticias/${noticia.id}`}>
                             <Pencil className="h-4 w-4" />
@@ -122,6 +135,16 @@ export default function AdminNoticiasPage() {
             </table>
           </div>
         </div>
+      )}
+
+      {emailNoticia && (
+        <SendNoticiaEmailDialog
+          noticia={emailNoticia}
+          open={!!emailNoticia}
+          onOpenChange={(open) => {
+            if (!open) setEmailNoticia(null);
+          }}
+        />
       )}
     </div>
   );

@@ -157,7 +157,7 @@ export default function Footer() {
             </Link>
           </div>
           <p className="text-center text-sm text-primary-foreground/60">
-            &copy; 2025 Universidad Frontera Norte. Todos los derechos
+            &copy; {new Date().getFullYear()} Universidad Frontera Norte. Todos los derechos
             reservados.
           </p>
         </div>

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 
 interface HeroProps {
@@ -6,16 +7,36 @@ interface HeroProps {
   subtitle?: string;
   ctaText?: string;
   ctaHref?: string;
+  backgroundImage?: string;
 }
 
-export default function Hero({ title, subtitle, ctaText, ctaHref }: HeroProps) {
+export default function Hero({
+  title,
+  subtitle,
+  ctaText,
+  ctaHref,
+  backgroundImage,
+}: HeroProps) {
   return (
-    <section className="relative w-full bg-gradient-to-br from-primary to-[hsl(217,71%,35%)] py-20 md:py-32 overflow-hidden">
-      {/* Subtle decorative background circles */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-white/5" />
-        <div className="absolute -bottom-32 -left-32 w-[30rem] h-[30rem] rounded-full bg-white/5" />
-      </div>
+    <section className="relative w-full bg-gradient-to-br from-primary to-[hsl(217,71%,35%)] py-24 md:py-36 overflow-hidden">
+      {/* Background image with overlay */}
+      {backgroundImage ? (
+        <>
+          <Image
+            src={backgroundImage}
+            alt=""
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/80 to-[hsl(217,71%,20%)]/90" />
+        </>
+      ) : (
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-white/5" />
+          <div className="absolute -bottom-32 -left-32 w-[30rem] h-[30rem] rounded-full bg-white/5" />
+        </div>
+      )}
 
       <div className="container relative mx-auto px-4 text-center">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
@@ -23,13 +44,13 @@ export default function Hero({ title, subtitle, ctaText, ctaHref }: HeroProps) {
         </h1>
 
         {subtitle && (
-          <p className="mt-4 text-lg md:text-xl text-white/80 max-w-3xl mx-auto">
+          <p className="mt-6 text-lg md:text-xl text-white/85 max-w-3xl mx-auto leading-relaxed">
             {subtitle}
           </p>
         )}
 
         {ctaText && ctaHref && (
-          <div className="mt-8">
+          <div className="mt-10">
             <Button variant="secondary" size="lg" asChild>
               <Link href={ctaHref}>{ctaText}</Link>
             </Button>
