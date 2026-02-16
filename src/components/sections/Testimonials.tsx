@@ -1,5 +1,4 @@
-import Image from "next/image";
-import { Quote } from "lucide-react";
+import { Quote, User } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { testimonials } from "@/data/testimonials";
 
@@ -25,14 +24,8 @@ export default function Testimonials() {
               </p>
 
               <div className="flex items-center gap-3">
-                <div className="relative h-12 w-12 rounded-full overflow-hidden bg-muted flex-shrink-0">
-                  <Image
-                    src={testimonial.image}
-                    alt={testimonial.name}
-                    fill
-                    className="object-cover"
-                    sizes="48px"
-                  />
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-muted flex-shrink-0">
+                  <User className="h-6 w-6 text-muted-foreground" />
                 </div>
                 <div>
                   <p className="font-semibold text-sm text-foreground">

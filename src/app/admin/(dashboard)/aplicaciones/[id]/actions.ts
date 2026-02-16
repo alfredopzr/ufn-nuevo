@@ -6,10 +6,84 @@ import type { ApplicationStatus, DocumentEstado } from "@/types/database";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
+async function generateMatricula(
+  supabase: ReturnType<typeof createClient>
+): Promise<string> {
+  const year = new Date().getFullYear();
+  const prefix = `UFN-${year}-`;
+
+  const { count } = await supabase
+    .from("students")
+    .select("id", { count: "exact", head: true })
+    .like("matricula", `${prefix}%`);
+
+  const next = (count ?? 0) + 1;
+  return `${prefix}${String(next).padStart(3, "0")}`;
+}
+
+async function createStudentFromApplication(
+  supabase: ReturnType<typeof createClient>,
+  applicationId: string
+): Promise<{ error?: string }> {
+  // Check if student already exists for this application (idempotency)
+  const { data: existing } = await supabase
+    .from("students")
+    .select("id")
+    .eq("application_id", applicationId)
+    .maybeSingle();
+
+  if (existing) {
+    return {};
+  }
+
+  // Fetch application data
+  const { data: app, error: appError } = await supabase
+    .from("applications")
+    .select("*")
+    .eq("id", applicationId)
+    .single();
+
+  if (appError || !app) {
+    return { error: "Error al obtener la solicitud." };
+  }
+
+  const matricula = await generateMatricula(supabase);
+
+  const { data: student, error: studentError } = await supabase
+    .from("students")
+    .insert({
+      matricula,
+      nombre: app.nombre,
+      email: app.email,
+      telefono: app.telefono,
+      curp: app.curp,
+      programa_id: app.programa_id,
+      cuatrimestre: 1,
+      status: "activo",
+      fecha_ingreso: new Date().toISOString().split("T")[0],
+      application_id: applicationId,
+    })
+    .select("id")
+    .single();
+
+  if (studentError || !student) {
+    console.error("Failed to create student:", studentError);
+    return { error: "Error al crear el registro de estudiante." };
+  }
+
+  // Bidirectional link
+  await supabase
+    .from("applications")
+    .update({ student_id: student.id })
+    .eq("id", applicationId);
+
+  return {};
+}
+
 export async function updateApplicationStatus(
   applicationId: string,
   status: ApplicationStatus
-) {
+): Promise<{ success?: boolean; error?: string }> {
   const supabase = createClient();
   const { error } = await supabase
     .from("applications")
@@ -19,6 +93,16 @@ export async function updateApplicationStatus(
   if (error) {
     return { error: "Error al actualizar el estado." };
   }
+
+  // Auto-convert to student when accepted
+  if (status === "aceptada") {
+    const result = await createStudentFromApplication(supabase, applicationId);
+    if (result.error) {
+      console.error("Student auto-creation failed:", result.error);
+      // Don't fail the status update — student can be created manually
+    }
+  }
+
   return { success: true };
 }
 

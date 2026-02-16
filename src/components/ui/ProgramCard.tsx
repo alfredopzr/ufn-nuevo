@@ -24,18 +24,17 @@ export default function ProgramCard({ program }: ProgramCardProps) {
 
   return (
     <Card className="flex flex-col h-full hover:shadow-lg transition-all duration-200 overflow-hidden group">
-      {program.image && (
-        <div className="relative h-40 overflow-hidden">
-          <Image
-            src={program.image}
-            alt={program.shortName}
-            fill
-            className="object-cover transition-transform duration-300 group-hover:scale-105"
-            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
-        </div>
-      )}
+      <div className="relative h-40 overflow-hidden">
+        <Image
+          src={program.image}
+          alt={program.shortName}
+          fill
+          className="object-cover transition-transform duration-300 group-hover:scale-105"
+          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          placeholder="blur"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+      </div>
 
       <CardHeader>
         <div className="flex items-center justify-between mb-3">

@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { programs, getProgramBySlug } from "@/data/programs";
 import { Badge } from "@/components/ui/badge";
@@ -60,9 +61,18 @@ export default function ProgramDetailPage({
 
   return (
     <>
-      {/* Program Header */}
-      <section className="bg-primary text-primary-foreground py-16 md:py-24">
-        <div className="container mx-auto px-4">
+      {/* Program Header with Hero Image */}
+      <section className="relative text-primary-foreground py-16 md:py-24 overflow-hidden">
+        <Image
+          src={program.heroImage}
+          alt={program.name}
+          fill
+          className="object-cover"
+          placeholder="blur"
+          priority
+        />
+        <div className="absolute inset-0 bg-primary/80" />
+        <div className="container mx-auto px-4 relative z-10">
           <Link
             href="/carreras"
             className="inline-flex items-center text-primary-foreground/70 hover:text-primary-foreground mb-6 transition-colors"

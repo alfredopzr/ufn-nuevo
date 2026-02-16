@@ -127,7 +127,7 @@ export default function HomePage() {
       <Testimonials />
 
       {/* Campus Gallery Section */}
-      <CampusGallery />
+      {/* <CampusGallery /> */}
 
       {/* Social Feed Section */}
       <SocialFeed />

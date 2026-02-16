@@ -27,6 +27,27 @@ export const applicationSchema = z.object({
 
 export type ApplicationFormData = z.infer<typeof applicationSchema>;
 
+export const studentSchema = z.object({
+  nombre: z.string().min(3, "El nombre debe tener al menos 3 caracteres"),
+  email: z.string().email("Correo electrónico inválido"),
+  telefono: z
+    .string()
+    .min(10, "El teléfono debe tener al menos 10 dígitos")
+    .regex(/^[\d\s-]+$/, "Teléfono inválido"),
+  curp: z
+    .string()
+    .length(18, "El CURP debe tener 18 caracteres")
+    .regex(curpRegex, "Formato de CURP inválido")
+    .transform((val) => val.toUpperCase())
+    .optional()
+    .or(z.literal("")),
+  programa_id: z.string().min(1, "Selecciona una carrera"),
+  cuatrimestre: z.coerce.number().int().min(1).max(9),
+  fecha_ingreso: z.string().min(1, "Selecciona una fecha de ingreso"),
+});
+
+export type StudentFormData = z.infer<typeof studentSchema>;
+
 export const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 export const ACCEPTED_FILE_TYPES = [
   "application/pdf",

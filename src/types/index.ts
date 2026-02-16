@@ -1,3 +1,5 @@
+import type { StaticImageData } from "next/image";
+
 export interface Program {
   slug: string;
   name: string;
@@ -10,7 +12,8 @@ export interface Program {
   duration: string;
   semesters: Semester[];
   icon: string;
-  image?: string;
+  image: StaticImageData;
+  heroImage: StaticImageData;
 }
 
 export interface Semester {

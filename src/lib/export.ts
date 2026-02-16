@@ -1,4 +1,4 @@
-import type { Application } from "@/types/database";
+import type { Application, Student } from "@/types/database";
 import type { Program } from "@/types";
 import * as XLSX from "xlsx";
 
@@ -8,6 +8,12 @@ const statusLabels: Record<string, string> = {
   documentos_pendientes: "Documentos Pendientes",
   aceptada: "Aceptada",
   rechazada: "Rechazada",
+};
+
+const studentStatusLabels: Record<string, string> = {
+  activo: "Activo",
+  egresado: "Egresado",
+  baja: "Baja",
 };
 
 function buildRows(applications: Application[], programs: Program[]) {
@@ -59,4 +65,55 @@ export function exportApplicationsXLSX(
   const workbook = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(workbook, worksheet, "Solicitudes");
   XLSX.writeFile(workbook, `solicitudes-ufn-${Date.now()}.xlsx`);
+}
+
+// ── Student exports ───────────────────────────────────────
+
+function buildStudentRows(students: Student[], programs: Program[]) {
+  return students.map((s) => ({
+    Matrícula: s.matricula,
+    Nombre: s.nombre,
+    Email: s.email,
+    Teléfono: s.telefono,
+    CURP: s.curp ?? "",
+    Programa:
+      programs.find((p) => p.slug === s.programa_id)?.shortName ??
+      s.programa_id,
+    Cuatrimestre: String(s.cuatrimestre),
+    Estado: studentStatusLabels[s.status] ?? s.status,
+    "Fecha de ingreso": new Date(s.fecha_ingreso).toLocaleDateString("es-MX"),
+  }));
+}
+
+export function exportStudentsCSV(
+  students: Student[],
+  programs: Program[]
+): void {
+  const rows = buildStudentRows(students, programs);
+  const worksheet = XLSX.utils.json_to_sheet(rows);
+  const workbook = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(workbook, worksheet, "Estudiantes");
+  XLSX.writeFile(workbook, `estudiantes-ufn-${Date.now()}.csv`, {
+    bookType: "csv",
+  });
+}
+
+export function exportStudentsXLSX(
+  students: Student[],
+  programs: Program[]
+): void {
+  const rows = buildStudentRows(students, programs);
+  const worksheet = XLSX.utils.json_to_sheet(rows);
+
+  const colWidths = Object.keys(rows[0] ?? {}).map((key) => ({
+    wch: Math.max(
+      key.length,
+      ...rows.map((r) => String((r as Record<string, string>)[key] ?? "").length)
+    ) + 2,
+  }));
+  worksheet["!cols"] = colWidths;
+
+  const workbook = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(workbook, worksheet, "Estudiantes");
+  XLSX.writeFile(workbook, `estudiantes-ufn-${Date.now()}.xlsx`);
 }

@@ -26,6 +26,7 @@ export interface Application {
   programa_id: string;
   como_se_entero: string | null;
   notas_internas: string | null;
+  student_id: string | null;
   created_at: string;
   updated_at: string;
 }
@@ -98,6 +99,45 @@ export interface NoticiaEnvio {
   filtros: { programa?: string; status?: string };
   total_destinatarios: number;
   enviado_por: string;
+  created_at: string;
+}
+
+// ── Students ──────────────────────────────────────────────
+
+export type StudentStatus = "activo" | "egresado" | "baja";
+
+export interface Student {
+  id: string;
+  matricula: string;
+  nombre: string;
+  email: string;
+  telefono: string;
+  curp: string | null;
+  programa_id: string;
+  cuatrimestre: number;
+  status: StudentStatus;
+  fecha_ingreso: string;
+  application_id: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+// ── Targeted Messaging ────────────────────────────────────
+
+export type MessageTipo = "email" | "whatsapp_list";
+export type MessageAudiencia = "estudiantes" | "aplicantes";
+
+export interface MessageSend {
+  id: string;
+  tipo: MessageTipo;
+  audiencia: MessageAudiencia;
+  filtros: Record<string, unknown>;
+  asunto: string;
+  mensaje: string;
+  total_destinatarios: number;
+  enviado_por: string;
+  noticia_id: string | null;
+  fecha_id: string | null;
   created_at: string;
 }
 

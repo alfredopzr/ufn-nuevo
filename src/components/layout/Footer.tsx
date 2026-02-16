@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import {
   Phone,
   MapPin,
@@ -11,6 +12,7 @@ import {
 } from "lucide-react";
 import { siteConfig, navigation } from "@/data/site";
 import { programs } from "@/data/programs";
+import cesfnLogo from "@/assets/cesfn-logo-84px.png";
 
 export default function Footer() {
   return (
@@ -19,9 +21,17 @@ export default function Footer() {
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           {/* Column 1: About */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold">
-              Universidad Frontera Norte
-            </h3>
+            <div className="flex items-center gap-3">
+              <Image
+                src={cesfnLogo}
+                alt="CESFN Logo"
+                height={40}
+                className="h-10 w-auto"
+              />
+              <h3 className="text-lg font-semibold">
+                Universidad Frontera Norte
+              </h3>
+            </div>
             <p className="text-sm leading-relaxed text-primary-foreground/80">
               {siteConfig.description.slice(0, 160)}...
             </p>
