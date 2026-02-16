@@ -13,11 +13,11 @@ export const siteConfig: SiteConfig = {
     whatsapp: "899-160-4645",
   },
   social: {
-    facebook: "https://www.facebook.com/ceaborNorte/",
-    twitter: "https://twitter.com/ceaborNorte",
-    instagram: "https://www.instagram.com/ceabornorte/",
-    linkedin: "https://www.linkedin.com/company/ceabornorte/",
-    youtube: "https://www.youtube.com/@ceabornorte",
+    facebook: "https://www.facebook.com/UniversidadFronteraNorte",
+    twitter: "https://twitter.com/UFronteraNorte",
+    instagram: "https://www.instagram.com/ufronteranorte/",
+    linkedin: "https://www.linkedin.com/company/universidad-frontera-norte/?viewAsMember=true",
+    youtube: "https://www.youtube.com/@ufronteranorte",
   },
   address: {
     street: "J. B. Chapa 787 y Colón",
