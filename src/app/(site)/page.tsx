@@ -9,7 +9,6 @@ import { siteConfig } from "@/data/site";
 import SocialFeed from "@/components/sections/SocialFeed";
 import FechasImportantes from "@/components/sections/FechasImportantes";
 import Testimonials from "@/components/sections/Testimonials";
-import CampusGallery from "@/components/sections/CampusGallery";
 import {
   GraduationCap,
   Users,
@@ -127,7 +126,7 @@ export default function HomePage() {
       <Testimonials />
 
       {/* Campus Gallery Section */}
-      <CampusGallery />
+      {/* <CampusGallery /> */}
 
       {/* Social Feed Section */}
       <SocialFeed />
