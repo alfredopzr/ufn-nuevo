@@ -2,9 +2,6 @@
 
 import { createClient } from "@/lib/supabase/server";
 import { applicationSchema } from "@/lib/validations";
-import { Resend } from "resend";
-
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function submitApplication(formData: FormData) {
   const supabase = createClient();
@@ -117,6 +114,8 @@ export async function submitApplication(formData: FormData) {
 
   // Send confirmation email
   try {
+    const { Resend } = await import("resend");
+    const resend = new Resend(process.env.RESEND_API_KEY);
     await resend.emails.send({
       from: process.env.EMAIL_FROM ?? "admisiones@ufn.edu.mx",
       to: data.email,

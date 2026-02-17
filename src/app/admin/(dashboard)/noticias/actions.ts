@@ -1,11 +1,7 @@
 "use server";
 
 import { createClient } from "@/lib/supabase/server";
-import { Resend } from "resend";
-import { buildNoticiaEmail } from "@/lib/email-templates/noticia";
 import type { NoticiaEnvio } from "@/types/database";
-
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 interface EmailFilters {
   programa?: string;
@@ -93,8 +89,12 @@ export async function sendNoticiaEmail(
 
   // Deduplicate emails
   const emails = Array.from(new Set(recipients.map((r) => r.email)));
+  const { buildNoticiaEmail } = await import("@/lib/email-templates/noticia");
   const html = buildNoticiaEmail(noticia.titulo, noticia.extracto, noticia.slug);
   const fromAddress = process.env.EMAIL_FROM ?? "admisiones@ufn.edu.mx";
+
+  const { Resend } = await import("resend");
+  const resend = new Resend(process.env.RESEND_API_KEY);
 
   // Send in batches of 50 (Resend batch limit is 100, using 50 for safety)
   const BATCH_SIZE = 50;

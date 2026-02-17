@@ -1,10 +1,7 @@
 "use server";
 
 import { createClient } from "@/lib/supabase/server";
-import { Resend } from "resend";
 import type { ApplicationStatus, DocumentEstado } from "@/types/database";
-
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 async function generateMatricula(
   supabase: ReturnType<typeof createClient>
@@ -153,6 +150,8 @@ export async function sendEmailToApplicant(
 ) {
   // Send the email via Resend
   try {
+    const { Resend } = await import("resend");
+    const resend = new Resend(process.env.RESEND_API_KEY);
     await resend.emails.send({
       from: process.env.EMAIL_FROM ?? "admisiones@ufn.edu.mx",
       to,
