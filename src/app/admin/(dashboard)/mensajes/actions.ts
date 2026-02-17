@@ -1,8 +1,6 @@
 "use server";
 
 import { createClient } from "@/lib/supabase/server";
-import { Resend } from "resend";
-import { buildTargetedEmail } from "@/lib/email-templates/targeted";
 import type {
   MessageAudiencia,
   MessageSend,
@@ -10,7 +8,10 @@ import type {
   Application,
 } from "@/types/database";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+async function getResendClient(): Promise<import("resend").Resend> {
+  const { Resend } = await import("resend");
+  return new Resend(process.env.RESEND_API_KEY);
+}
 
 // ── Filter types ──────────────────────────────────────────
 
@@ -268,8 +269,10 @@ export async function sendTargetedEmail(params: {
     ctaLabel = "Ver fechas importantes";
   }
 
+  const { buildTargetedEmail } = await import("@/lib/email-templates/targeted");
   const html = buildTargetedEmail(params.asunto, params.mensaje, ctaUrl, ctaLabel);
   const fromAddress = process.env.EMAIL_FROM ?? "admisiones@ufn.edu.mx";
+  const resend = await getResendClient();
 
   // Send in batches of 50
   const BATCH_SIZE = 50;
