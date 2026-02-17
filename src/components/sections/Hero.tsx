@@ -18,8 +18,8 @@ export default function Hero({
   backgroundImage,
 }: HeroProps) {
   return (
-    <section className="relative w-full bg-gradient-to-br from-primary to-[hsl(217,71%,35%)] py-24 md:py-36 overflow-hidden">
-      {/* Background image with overlay */}
+    <section className="relative w-full bg-[hsl(217,71%,15%)] py-24 md:py-36 overflow-hidden">
+      {/* Background */}
       {backgroundImage ? (
         <>
           <Image
@@ -29,16 +29,26 @@ export default function Hero({
             className="object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/80 to-[hsl(217,71%,20%)]/90" />
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/60 to-[hsl(217,71%,20%)]/75" />
         </>
       ) : (
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-white/5" />
-          <div className="absolute -bottom-32 -left-32 w-[30rem] h-[30rem] rounded-full bg-white/5" />
-        </div>
+        <div className="absolute inset-0 bg-gradient-to-br from-[hsl(217,71%,28%)] via-primary to-[hsl(217,71%,18%)]" />
       )}
 
+      {/* Geometric accents */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-20 -right-20 w-[28rem] h-[28rem] rounded-full border border-white/10 animate-hero-float" />
+        <div className="absolute -top-20 -right-20 w-96 h-96 rounded-full bg-white/[0.04] animate-hero-float" />
+        <div className="absolute -bottom-28 -left-28 w-80 h-80 rounded-full border border-white/10 animate-hero-float-slow" />
+        <div className="absolute -bottom-28 -left-28 w-64 h-64 rounded-full bg-white/[0.06] animate-hero-float-slow" />
+        <div className="absolute top-1/3 right-[12%] w-24 h-24 rounded-full bg-secondary/10 animate-hero-float-slow" />
+        <div className="absolute top-[55%] left-[8%] w-px h-48 bg-white/10 rotate-[25deg]" />
+        <div className="absolute top-[15%] right-[6%] w-px h-36 bg-white/10 -rotate-[20deg]" />
+        <div className="absolute bottom-[30%] right-[25%] w-px h-28 bg-white/[0.07] rotate-[50deg]" />
+      </div>
+
       <div className="container relative mx-auto px-4 text-center">
+        <div className="w-16 h-1 rounded-full bg-secondary mx-auto mb-6" />
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
           {title}
         </h1>

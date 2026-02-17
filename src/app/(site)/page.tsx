@@ -55,7 +55,6 @@ export default function HomePage() {
         subtitle="Universidad Frontera Norte — Reynosa, Tamaulipas, México"
         ctaText="Inscríbete Ahora"
         ctaHref="/inscripcion"
-        backgroundImage="/images/hero/hero-campus.jpg"
       />
 
       <StatsBar />
