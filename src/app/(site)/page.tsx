@@ -102,19 +102,21 @@ export default function HomePage() {
             subtitle={siteConfig.description}
           />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {features.map((feature) => (
               <div
                 key={feature.title}
-                className="text-center p-6 rounded-lg bg-background shadow-sm border-t-2 border-primary transition-all duration-200 hover:-translate-y-1 hover:shadow-md"
+                className="flex items-start gap-5 p-6 rounded-lg bg-background shadow-sm border-l-4 border-primary transition-all duration-200 hover:shadow-md"
               >
-                <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-primary/10 text-primary mb-4">
+                <div className="flex items-center justify-center w-14 h-14 rounded-full bg-primary/10 text-primary shrink-0">
                   <feature.icon className="w-7 h-7" />
                 </div>
-                <h4 className="font-semibold text-lg mb-2">{feature.title}</h4>
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  {feature.description}
-                </p>
+                <div>
+                  <h4 className="font-semibold text-lg mb-1">{feature.title}</h4>
+                  <p className="text-muted-foreground text-sm leading-relaxed">
+                    {feature.description}
+                  </p>
+                </div>
               </div>
             ))}
           </div>
@@ -133,7 +135,7 @@ export default function HomePage() {
       {/* CTA Section */}
       <section className="py-16 md:py-24 bg-primary text-primary-foreground">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
             Inicia tu futuro hoy
           </h2>
           <p className="text-lg text-primary-foreground/80 mb-8 max-w-2xl mx-auto">

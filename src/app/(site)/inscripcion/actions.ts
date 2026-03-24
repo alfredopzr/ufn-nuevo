@@ -2,6 +2,7 @@
 
 import { createClient } from "@/lib/supabase/server";
 import { applicationSchema } from "@/lib/validations";
+import { escapeHtml } from "@/lib/utils";
 
 export async function submitApplication(formData: FormData) {
   const supabase = createClient();
@@ -140,7 +141,7 @@ function buildConfirmationEmail(
         <div style="background-color: #fef3c7; border: 1px solid #f59e0b; border-radius: 8px; padding: 16px; margin-top: 16px;">
           <p style="margin: 0 0 8px; font-weight: 600; color: #92400e;">Documentos pendientes:</p>
           <ul style="margin: 0; padding-left: 20px; color: #92400e;">
-            ${pendingDocs.map((doc) => `<li>${doc}</li>`).join("")}
+            ${pendingDocs.map((doc) => `<li>${escapeHtml(doc)}</li>`).join("")}
           </ul>
           <p style="margin: 8px 0 0; font-size: 14px; color: #92400e;">
             Nuestro equipo te contactará para indicarte cómo entregarlos.
@@ -154,7 +155,7 @@ function buildConfirmationEmail(
         <h1 style="margin: 0; font-size: 20px;">Universidad Frontera Norte</h1>
       </div>
       <div style="border: 1px solid #e5e7eb; border-top: none; border-radius: 0 0 8px 8px; padding: 24px;">
-        <p>Hola <strong>${nombre}</strong>,</p>
+        <p>Hola <strong>${escapeHtml(nombre)}</strong>,</p>
         <p>Hemos recibido tu solicitud de inscripción correctamente. Nuestro equipo de admisiones revisará tu información y te contactará con los siguientes pasos.</p>
         ${pendingSection}
         <p style="margin-top: 16px; color: #6b7280; font-size: 14px;">

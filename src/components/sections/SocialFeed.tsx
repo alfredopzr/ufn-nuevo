@@ -17,8 +17,15 @@ function igEmbedUrl(postUrl: string) {
   return `${clean}/embed/captioned/`;
 }
 
-const IG_CARD_WIDTH = 300;
-const IG_CARD_HEIGHT = 430;
+function parseFacebookEmbed(embedHtml: string): { src: string; height: number } | null {
+  const srcMatch = embedHtml.match(/src="([^"]+)"/);
+  const heightMatch = embedHtml.match(/height="(\d+)"/);
+  if (!srcMatch) return null;
+  return {
+    src: srcMatch[1],
+    height: heightMatch ? parseInt(heightMatch[1], 10) : 690,
+  };
+}
 
 function Carousel({
   children,
@@ -44,11 +51,14 @@ function Carousel({
       <div
         ref={scrollRef}
         aria-label={label}
-        className="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-4 -mb-4"
-        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+        className="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-4 -mb-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
       >
         {children}
       </div>
+
+      {/* Fade edges to indicate scrollability */}
+      <div className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-muted/40 to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-muted/40 to-transparent" />
 
       <button
         onClick={() => scroll("left")}
@@ -93,13 +103,11 @@ export default function SocialFeed() {
               {instagramPosts.map((postUrl) => (
                 <div
                   key={postUrl}
-                  className="snap-start shrink-0 rounded-xl bg-background shadow-sm border overflow-hidden"
-                  style={{ width: IG_CARD_WIDTH, height: IG_CARD_HEIGHT }}
+                  className="snap-start shrink-0 rounded-xl bg-background shadow-sm border overflow-hidden w-[300px] h-[430px]"
                 >
                   <iframe
                     src={igEmbedUrl(postUrl)}
-                    className="w-full border-0"
-                    style={{ marginTop: "-54px", height: "calc(100% + 54px)" }}
+                    className="w-full border-0 -mt-[54px] h-[calc(100%+54px)]"
                     loading="lazy"
                     title="Publicación de Instagram"
                   />
@@ -117,13 +125,27 @@ export default function SocialFeed() {
               <h3 className="text-lg font-semibold">Facebook</h3>
             </div>
             <Carousel label="Publicaciones de Facebook">
-              {facebookEmbeds.map((embedHtml, i) => (
-                <div
-                  key={i}
-                  className="snap-start shrink-0 rounded-xl shadow-sm border [&>iframe]:block h-full"
-                  dangerouslySetInnerHTML={{ __html: embedHtml }}
-                />
-              ))}
+              {facebookEmbeds.map((embedHtml, i) => {
+                const parsed = parseFacebookEmbed(embedHtml);
+                if (!parsed) return null;
+                return (
+                  <div
+                    key={i}
+                    className="snap-start shrink-0 w-[500px] rounded-xl shadow-sm border overflow-hidden"
+                  >
+                    <iframe
+                      src={parsed.src}
+                      width="500"
+                      height={parsed.height}
+                      className="border-0 block"
+                      scrolling="no"
+                      allowFullScreen
+                      loading="lazy"
+                      title="Publicación de Facebook"
+                    />
+                  </div>
+                );
+              })}
             </Carousel>
           </div>
         )}

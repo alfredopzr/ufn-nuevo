@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import SectionHeading from "@/components/ui/SectionHeading";
 import type { FechaImportante } from "@/types/database";
+import { cn } from "@/lib/utils";
 
 const MONTH_ABBR = [
   "Ene", "Feb", "Mar", "Abr", "May", "Jun",
@@ -31,27 +32,30 @@ export default async function FechasImportantes() {
           subtitle="Mantente al tanto de las proximas fechas clave"
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
-          {(fechas as FechaImportante[]).map((fecha) => {
+        <div className="max-w-3xl mx-auto space-y-0">
+          {(fechas as FechaImportante[]).map((fecha, i) => {
             const dateObj = new Date(fecha.fecha + "T12:00:00");
             const day = dateObj.getDate();
             const month = MONTH_ABBR[dateObj.getMonth()];
+            const isLast = i === fechas.length - 1;
 
             return (
-              <div
-                key={fecha.id}
-                className="flex items-start gap-4 rounded-lg border bg-background p-4 shadow-sm"
-              >
-                <div className="flex-shrink-0 flex flex-col items-center justify-center w-14 h-14 rounded-lg bg-primary/10 text-primary">
-                  <span className="text-xl font-bold leading-none">{day}</span>
-                  <span className="text-xs font-medium uppercase">{month}</span>
+              <div key={fecha.id} className="flex gap-6">
+                {/* Date + timeline line */}
+                <div className="flex flex-col items-center">
+                  <div className="flex flex-col items-center justify-center w-14 h-14 rounded-full bg-primary text-primary-foreground shrink-0">
+                    <span className="text-lg font-bold leading-none">{day}</span>
+                    <span className="text-[10px] font-medium uppercase">{month}</span>
+                  </div>
+                  {!isLast && <div className="w-px flex-1 bg-border my-2" />}
                 </div>
-                <div className="min-w-0">
-                  <h3 className="font-semibold text-foreground leading-tight">
+                {/* Content */}
+                <div className={cn("pb-8", isLast && "pb-0")}>
+                  <h3 className="font-semibold text-foreground leading-tight pt-3">
                     {fecha.titulo}
                   </h3>
                   {fecha.descripcion && (
-                    <p className="text-sm text-muted-foreground mt-1 line-clamp-2">
+                    <p className="text-sm text-muted-foreground mt-1">
                       {fecha.descripcion}
                     </p>
                   )}

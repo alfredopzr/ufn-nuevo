@@ -1,23 +1,10 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
+import { generateMatricula } from "@/lib/matricula";
 import { studentSchema } from "@/lib/validations";
 import type { StudentStatus } from "@/types/database";
-
-async function generateMatricula(
-  supabase: ReturnType<typeof createClient>
-): Promise<string> {
-  const year = new Date().getFullYear();
-  const prefix = `UFN-${year}-`;
-
-  const { count } = await supabase
-    .from("students")
-    .select("id", { count: "exact", head: true })
-    .like("matricula", `${prefix}%`);
-
-  const next = (count ?? 0) + 1;
-  return `${prefix}${String(next).padStart(3, "0")}`;
-}
 
 export async function createStudent(
   formData: Record<string, unknown>
@@ -29,6 +16,12 @@ export async function createStudent(
   }
 
   const supabase = createClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) return { error: "No autorizado." };
+
   const matricula = await generateMatricula(supabase);
 
   const { error } = await supabase.from("students").insert({
@@ -48,6 +41,7 @@ export async function createStudent(
     return { error: "Error al crear el estudiante." };
   }
 
+  revalidatePath("/admin/estudiantes");
   return { success: true };
 }
 
@@ -65,6 +59,11 @@ export async function updateStudent(
 ): Promise<{ success?: boolean; error?: string }> {
   const supabase = createClient();
 
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) return { error: "No autorizado." };
+
   const { error } = await supabase
     .from("students")
     .update(data)
@@ -75,6 +74,7 @@ export async function updateStudent(
     return { error: "Error al actualizar el estudiante." };
   }
 
+  revalidatePath("/admin/estudiantes");
   return { success: true };
 }
 
@@ -83,21 +83,21 @@ export async function deleteStudent(
 ): Promise<{ success?: boolean; error?: string }> {
   const supabase = createClient();
 
-  // Remove bidirectional link from applications first
-  await supabase
-    .from("applications")
-    .update({ student_id: null })
-    .eq("student_id", studentId);
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) return { error: "No autorizado." };
 
   const { error } = await supabase
     .from("students")
-    .delete()
+    .update({ status: "baja" as StudentStatus })
     .eq("id", studentId);
 
   if (error) {
-    console.error("Failed to delete student:", error);
-    return { error: "Error al eliminar el estudiante." };
+    console.error("Failed to soft-delete student:", error);
+    return { error: "Error al dar de baja al estudiante." };
   }
 
+  revalidatePath("/admin/estudiantes");
   return { success: true };
 }

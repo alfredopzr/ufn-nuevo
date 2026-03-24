@@ -1,6 +1,7 @@
 import { Quote, User } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { testimonials } from "@/data/testimonials";
+import { cn } from "@/lib/utils";
 
 export default function Testimonials() {
   return (
@@ -11,15 +12,18 @@ export default function Testimonials() {
           subtitle="Conoce las experiencias de quienes han formado parte de nuestra comunidad académica"
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {testimonials.map((testimonial) => (
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 max-w-6xl mx-auto">
+          {testimonials.map((testimonial, i) => (
             <div
               key={testimonial.name}
-              className="relative rounded-xl border bg-card p-6 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md"
+              className={cn(
+                "relative rounded-xl border bg-card p-6 shadow-sm transition-all duration-200 hover:shadow-md",
+                i === 0 ? "lg:col-span-5 lg:row-span-2 flex flex-col justify-between" : "lg:col-span-7"
+              )}
             >
-              <Quote className="h-8 w-8 text-secondary/40 mb-4" />
+              <Quote className={cn("text-secondary/40 mb-4", i === 0 ? "h-10 w-10" : "h-8 w-8")} />
 
-              <p className="text-muted-foreground leading-relaxed mb-6">
+              <p className={cn("text-muted-foreground leading-relaxed mb-6", i === 0 && "text-lg")}>
                 &ldquo;{testimonial.quote}&rdquo;
               </p>
 

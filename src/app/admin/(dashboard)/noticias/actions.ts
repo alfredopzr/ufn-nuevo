@@ -1,6 +1,7 @@
 "use server";
 
 import { createClient } from "@/lib/supabase/server";
+import { revalidatePath } from "next/cache";
 import type { NoticiaEnvio } from "@/types/database";
 
 interface EmailFilters {
@@ -132,4 +133,26 @@ export async function sendNoticiaEmail(
   });
 
   return { success: true, count: totalSent };
+}
+
+export async function deleteNoticia(
+  noticiaId: string
+): Promise<{ success?: boolean; error?: string }> {
+  const supabase = createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) return { error: "No autorizado." };
+
+  const { error } = await supabase
+    .from("noticias")
+    .delete()
+    .eq("id", noticiaId);
+
+  if (error) {
+    return { error: "Error al eliminar la noticia." };
+  }
+
+  revalidatePath("/admin/noticias");
+  return { success: true };
 }

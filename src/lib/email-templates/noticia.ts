@@ -1,3 +1,5 @@
+import { escapeHtml } from "@/lib/utils";
+
 export function buildNoticiaEmail(
   titulo: string,
   extracto: string,
@@ -12,8 +14,8 @@ export function buildNoticiaEmail(
         <h1 style="margin: 0; font-size: 20px;">Universidad Frontera Norte</h1>
       </div>
       <div style="border: 1px solid #e5e7eb; border-top: none; border-radius: 0 0 8px 8px; padding: 24px;">
-        <h2 style="margin: 0 0 16px; font-size: 22px; color: #1e3a5f;">${titulo}</h2>
-        <p style="margin: 0 0 20px; color: #374151; line-height: 1.6;">${extracto}</p>
+        <h2 style="margin: 0 0 16px; font-size: 22px; color: #1e3a5f;">${escapeHtml(titulo)}</h2>
+        <p style="margin: 0 0 20px; color: #374151; line-height: 1.6;">${escapeHtml(extracto)}</p>
         <div style="text-align: center; margin: 24px 0;">
           <a href="${articleUrl}" style="display: inline-block; background-color: #1e3a5f; color: white; text-decoration: none; padding: 12px 28px; border-radius: 6px; font-weight: 600; font-size: 14px;">
             Leer más

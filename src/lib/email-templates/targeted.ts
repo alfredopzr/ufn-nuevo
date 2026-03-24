@@ -1,3 +1,5 @@
+import { escapeHtml } from "@/lib/utils";
+
 export function buildTargetedEmail(
   asunto: string,
   mensaje: string,
@@ -8,8 +10,8 @@ export function buildTargetedEmail(
     ctaUrl && ctaLabel
       ? `
         <div style="text-align: center; margin: 24px 0;">
-          <a href="${ctaUrl}" style="display: inline-block; background-color: #1e3a5f; color: white; text-decoration: none; padding: 12px 28px; border-radius: 6px; font-weight: 600; font-size: 14px;">
-            ${ctaLabel}
+          <a href="${escapeHtml(ctaUrl)}" style="display: inline-block; background-color: #1e3a5f; color: white; text-decoration: none; padding: 12px 28px; border-radius: 6px; font-weight: 600; font-size: 14px;">
+            ${escapeHtml(ctaLabel)}
           </a>
         </div>`
       : "";
@@ -20,9 +22,9 @@ export function buildTargetedEmail(
         <h1 style="margin: 0; font-size: 20px;">Universidad Frontera Norte</h1>
       </div>
       <div style="border: 1px solid #e5e7eb; border-top: none; border-radius: 0 0 8px 8px; padding: 24px;">
-        <h2 style="margin: 0 0 16px; font-size: 22px; color: #1e3a5f;">${asunto}</h2>
+        <h2 style="margin: 0 0 16px; font-size: 22px; color: #1e3a5f;">${escapeHtml(asunto)}</h2>
         <div style="margin: 0 0 20px; color: #374151; line-height: 1.6;">
-          ${mensaje.replace(/\n/g, "<br>")}
+          ${escapeHtml(mensaje).replace(/\n/g, "<br>")}
         </div>
         ${ctaBlock}
         <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 20px 0;" />

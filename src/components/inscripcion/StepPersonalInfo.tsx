@@ -82,7 +82,7 @@ export default function StepPersonalInfo({ defaultValues, onComplete }: Props) {
         <div className="space-y-2 md:col-span-2">
           <Label htmlFor="programa_id">Carrera *</Label>
           <Select value={programaId} onValueChange={setProgramaId}>
-            <SelectTrigger id="programa_id">
+            <SelectTrigger id="programa_id" aria-describedby={errors.programa_id ? "programa_id-error" : undefined} aria-invalid={!!errors.programa_id}>
               <SelectValue placeholder="Selecciona una carrera" />
             </SelectTrigger>
             <SelectContent>
@@ -94,7 +94,7 @@ export default function StepPersonalInfo({ defaultValues, onComplete }: Props) {
             </SelectContent>
           </Select>
           {errors.programa_id && (
-            <p className="text-sm text-destructive">{errors.programa_id}</p>
+            <p id="programa_id-error" className="text-sm text-destructive">{errors.programa_id}</p>
           )}
         </div>
 
@@ -106,9 +106,11 @@ export default function StepPersonalInfo({ defaultValues, onComplete }: Props) {
             value={nombre}
             onChange={(e) => setNombre(e.target.value)}
             placeholder="Tu nombre completo"
+            aria-describedby={errors.nombre ? "nombre-error" : undefined}
+            aria-invalid={!!errors.nombre}
           />
           {errors.nombre && (
-            <p className="text-sm text-destructive">{errors.nombre}</p>
+            <p id="nombre-error" className="text-sm text-destructive">{errors.nombre}</p>
           )}
         </div>
 
@@ -120,9 +122,11 @@ export default function StepPersonalInfo({ defaultValues, onComplete }: Props) {
             value={preparatoria}
             onChange={(e) => setPreparatoria(e.target.value)}
             placeholder="Nombre de tu preparatoria"
+            aria-describedby={errors.preparatoria ? "preparatoria-error" : undefined}
+            aria-invalid={!!errors.preparatoria}
           />
           {errors.preparatoria && (
-            <p className="text-sm text-destructive">{errors.preparatoria}</p>
+            <p id="preparatoria-error" className="text-sm text-destructive">{errors.preparatoria}</p>
           )}
         </div>
 
@@ -134,9 +138,11 @@ export default function StepPersonalInfo({ defaultValues, onComplete }: Props) {
             value={direccion}
             onChange={(e) => setDireccion(e.target.value)}
             placeholder="Calle, número, colonia, ciudad"
+            aria-describedby={errors.direccion ? "direccion-error" : undefined}
+            aria-invalid={!!errors.direccion}
           />
           {errors.direccion && (
-            <p className="text-sm text-destructive">{errors.direccion}</p>
+            <p id="direccion-error" className="text-sm text-destructive">{errors.direccion}</p>
           )}
         </div>
 
@@ -149,9 +155,11 @@ export default function StepPersonalInfo({ defaultValues, onComplete }: Props) {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="correo@ejemplo.com"
+            aria-describedby={errors.email ? "email-error" : undefined}
+            aria-invalid={!!errors.email}
           />
           {errors.email && (
-            <p className="text-sm text-destructive">{errors.email}</p>
+            <p id="email-error" className="text-sm text-destructive">{errors.email}</p>
           )}
         </div>
 
@@ -164,9 +172,11 @@ export default function StepPersonalInfo({ defaultValues, onComplete }: Props) {
             value={telefono}
             onChange={(e) => setTelefono(e.target.value)}
             placeholder="899-000-0000"
+            aria-describedby={errors.telefono ? "telefono-error" : undefined}
+            aria-invalid={!!errors.telefono}
           />
           {errors.telefono && (
-            <p className="text-sm text-destructive">{errors.telefono}</p>
+            <p id="telefono-error" className="text-sm text-destructive">{errors.telefono}</p>
           )}
         </div>
 
@@ -180,9 +190,11 @@ export default function StepPersonalInfo({ defaultValues, onComplete }: Props) {
             maxLength={18}
             className="uppercase"
             placeholder="XXXX000000XXXXXX00"
+            aria-describedby={errors.curp ? "curp-error" : undefined}
+            aria-invalid={!!errors.curp}
           />
           {errors.curp && (
-            <p className="text-sm text-destructive">{errors.curp}</p>
+            <p id="curp-error" className="text-sm text-destructive">{errors.curp}</p>
           )}
         </div>
 

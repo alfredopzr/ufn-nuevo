@@ -24,17 +24,12 @@ import {
   Trash2,
 } from "lucide-react";
 import { updateStudent, deleteStudent } from "@/app/admin/(dashboard)/estudiantes/actions";
+import { studentStatusConfig } from "@/lib/status";
 
 const statusOptions: { value: StudentStatus; label: string; color: string }[] =
-  [
-    { value: "activo", label: "Activo", color: "bg-green-100 text-green-800" },
-    {
-      value: "egresado",
-      label: "Egresado",
-      color: "bg-blue-100 text-blue-800",
-    },
-    { value: "baja", label: "Baja", color: "bg-red-100 text-red-800" },
-  ];
+  (Object.entries(studentStatusConfig) as [StudentStatus, { label: string; className: string }][]).map(
+    ([value, cfg]) => ({ value, label: cfg.label, color: cfg.className })
+  );
 
 interface Props {
   student: Student;

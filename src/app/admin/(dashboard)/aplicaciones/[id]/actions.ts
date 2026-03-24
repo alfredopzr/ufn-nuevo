@@ -1,22 +1,10 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
+import { generateMatricula } from "@/lib/matricula";
+import { escapeHtml } from "@/lib/utils";
 import type { ApplicationStatus, DocumentEstado } from "@/types/database";
-
-async function generateMatricula(
-  supabase: ReturnType<typeof createClient>
-): Promise<string> {
-  const year = new Date().getFullYear();
-  const prefix = `UFN-${year}-`;
-
-  const { count } = await supabase
-    .from("students")
-    .select("id", { count: "exact", head: true })
-    .like("matricula", `${prefix}%`);
-
-  const next = (count ?? 0) + 1;
-  return `${prefix}${String(next).padStart(3, "0")}`;
-}
 
 async function createStudentFromApplication(
   supabase: ReturnType<typeof createClient>,
@@ -82,6 +70,12 @@ export async function updateApplicationStatus(
   status: ApplicationStatus
 ): Promise<{ success?: boolean; error?: string }> {
   const supabase = createClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) return { error: "No autorizado." };
+
   const { error } = await supabase
     .from("applications")
     .update({ status })
@@ -100,14 +94,21 @@ export async function updateApplicationStatus(
     }
   }
 
+  revalidatePath("/admin", "layout");
   return { success: true };
 }
 
 export async function updateInternalNotes(
   applicationId: string,
   notas_internas: string
-) {
+): Promise<{ success?: boolean; error?: string }> {
   const supabase = createClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) return { error: "No autorizado." };
+
   const { error } = await supabase
     .from("applications")
     .update({ notas_internas })
@@ -116,6 +117,8 @@ export async function updateInternalNotes(
   if (error) {
     return { error: "Error al guardar las notas." };
   }
+
+  revalidatePath("/admin/aplicaciones/" + applicationId);
   return { success: true };
 }
 
@@ -123,8 +126,14 @@ export async function updateDocumentStatus(
   documentRecordId: string,
   estado: DocumentEstado,
   notas?: string
-) {
+): Promise<{ success?: boolean; error?: string }> {
   const supabase = createClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) return { error: "No autorizado." };
+
   const updateData: { estado: DocumentEstado; notas?: string } = { estado };
   if (notas !== undefined) {
     updateData.notas = notas;
@@ -138,6 +147,8 @@ export async function updateDocumentStatus(
   if (error) {
     return { error: "Error al actualizar el documento." };
   }
+
+  revalidatePath("/admin", "layout");
   return { success: true };
 }
 
@@ -147,7 +158,14 @@ export async function sendEmailToApplicant(
   asunto: string,
   mensaje: string,
   senderEmail: string
-) {
+): Promise<{ success?: boolean; error?: string }> {
+  const supabase = createClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) return { error: "No autorizado." };
+
   // Send the email via Resend
   try {
     const { Resend } = await import("resend");
@@ -162,7 +180,7 @@ export async function sendEmailToApplicant(
             <h1 style="margin: 0; font-size: 20px;">Universidad Frontera Norte</h1>
           </div>
           <div style="border: 1px solid #e5e7eb; border-top: none; border-radius: 0 0 8px 8px; padding: 24px;">
-            ${mensaje.replace(/\n/g, "<br>")}
+            ${escapeHtml(mensaje).replace(/\n/g, "<br>")}
             <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 20px 0;" />
             <p style="font-size: 12px; color: #9ca3af; text-align: center;">
               Universidad Frontera Norte — J. B. Chapa 787 y Colón, Centro, Reynosa, Tamaulipas
@@ -177,14 +195,17 @@ export async function sendEmailToApplicant(
   }
 
   // Log the communication
-  const supabase = createClient();
-  await supabase.from("communications").insert({
+  const { error: commError } = await supabase.from("communications").insert({
     application_id: applicationId,
     tipo: "email",
     asunto,
     mensaje,
     enviado_por: senderEmail,
   });
+  if (commError) {
+    console.error("Failed to log communication:", commError);
+  }
 
+  revalidatePath("/admin/aplicaciones/" + applicationId);
   return { success: true };
 }

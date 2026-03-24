@@ -28,7 +28,7 @@ export default function Footer() {
                 height={40}
                 className="h-10 w-auto"
               />
-              <h3 className="text-lg font-semibold">
+              <h3 className="font-display text-lg font-semibold">
                 Universidad Frontera Norte
               </h3>
             </div>
@@ -42,7 +42,7 @@ export default function Footer() {
 
           {/* Column 2: Quick Links */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold">Enlaces R&aacute;pidos</h3>
+            <h3 className="font-display text-lg font-semibold">Enlaces R&aacute;pidos</h3>
             <ul className="space-y-2">
               {navigation.map((item) => (
                 <li key={item.href}>
@@ -59,7 +59,7 @@ export default function Footer() {
 
           {/* Column 3: Programs */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold">Carreras</h3>
+            <h3 className="font-display text-lg font-semibold">Carreras</h3>
             <ul className="space-y-2">
               {programs.map((program) => (
                 <li key={program.slug}>
@@ -76,7 +76,7 @@ export default function Footer() {
 
           {/* Column 4: Contact */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold">Contacto</h3>
+            <h3 className="font-display text-lg font-semibold">Contacto</h3>
             <ul className="space-y-3">
               <li>
                 <Link

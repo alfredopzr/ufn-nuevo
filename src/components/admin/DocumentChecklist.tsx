@@ -21,22 +21,7 @@ import {
   Loader2,
   Save,
 } from "lucide-react";
-
-const estadoLabels: Record<DocumentEstado, string> = {
-  pendiente: "Pendiente",
-  subido: "Subido",
-  recibido_externo: "Recibido Externo",
-  aprobado: "Aprobado",
-  rechazado: "Rechazado",
-};
-
-const estadoColors: Record<DocumentEstado, string> = {
-  pendiente: "bg-gray-100 text-gray-800",
-  subido: "bg-blue-100 text-blue-800",
-  recibido_externo: "bg-purple-100 text-purple-800",
-  aprobado: "bg-green-100 text-green-800",
-  rechazado: "bg-red-100 text-red-800",
-};
+import { documentStatusConfig } from "@/lib/status";
 
 interface DocumentRecord {
   id: string;
@@ -150,19 +135,19 @@ function DocumentRow({ doc }: { doc: DocumentRecord }) {
           >
             <SelectTrigger className="w-[180px] h-9">
               <SelectValue>
-                <Badge variant="secondary" className={estadoColors[estado]}>
-                  {estadoLabels[estado]}
+                <Badge variant="secondary" className={documentStatusConfig[estado]?.className ?? ""}>
+                  {documentStatusConfig[estado]?.label ?? estado}
                 </Badge>
               </SelectValue>
             </SelectTrigger>
             <SelectContent>
-              {Object.entries(estadoLabels).map(([value, label]) => (
+              {Object.entries(documentStatusConfig).map(([value, cfg]) => (
                 <SelectItem key={value} value={value}>
                   <Badge
                     variant="secondary"
-                    className={estadoColors[value as DocumentEstado]}
+                    className={cfg.className}
                   >
-                    {label}
+                    {cfg.label}
                   </Badge>
                 </SelectItem>
               ))}

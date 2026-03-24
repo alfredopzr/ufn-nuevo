@@ -61,3 +61,10 @@
 .animate-hero-float-slow {
   animation: hero-float-slow 8s ease-in-out infinite;
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-hero-float,
+  .animate-hero-float-slow {
+    animation: none;
+  }
+}

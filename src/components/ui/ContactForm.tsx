@@ -20,32 +20,36 @@ export default function ContactForm() {
   const [telefono, setTelefono] = useState("");
   const [carrera, setCarrera] = useState("");
   const [mensaje, setMensaje] = useState("");
-  const [success, setSuccess] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    // In a real application this would send data to an API
-    setSuccess(true);
-    setNombre("");
-    setEmail("");
-    setTelefono("");
-    setCarrera("");
-    setMensaje("");
+    setIsSubmitting(true);
+    // TODO: Wire to a server action with Resend
+    // For now, open WhatsApp with the message content
+    const whatsappText = `Hola, soy ${nombre}. ${mensaje}`;
+    window.open(
+      `https://wa.me/528991604645?text=${encodeURIComponent(whatsappText)}`,
+      "_blank"
+    );
+    setIsSubmitting(false);
+    setSubmitted(true);
   }
 
-  if (success) {
+  if (submitted) {
     return (
-      <div className="rounded-lg border border-green-300 bg-green-50 p-6 text-green-800 text-center">
+      <div className="rounded-lg border bg-muted p-6 text-center">
         <p className="font-semibold text-lg">
-          ¡Mensaje enviado!
+          ¡Gracias por tu interés!
         </p>
-        <p className="mt-1">
-          Nos pondremos en contacto contigo pronto.
+        <p className="mt-2 text-muted-foreground">
+          Te redirigimos a WhatsApp para continuar la conversación. Si prefieres, también puedes llamarnos directamente.
         </p>
         <Button
           variant="outline"
           className="mt-4"
-          onClick={() => setSuccess(false)}
+          onClick={() => setSubmitted(false)}
         >
           Enviar otro mensaje
         </Button>
@@ -117,8 +121,8 @@ export default function ContactForm() {
         />
       </div>
 
-      <Button type="submit" className="w-full">
-        Enviar Mensaje
+      <Button type="submit" className="w-full" disabled={isSubmitting}>
+        {isSubmitting ? "Enviando..." : "Enviar Mensaje"}
       </Button>
     </form>
   );

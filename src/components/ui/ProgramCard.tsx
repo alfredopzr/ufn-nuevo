@@ -11,7 +11,6 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-
 interface ProgramCardProps {
   program: Program;
 }

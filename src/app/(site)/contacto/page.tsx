@@ -53,7 +53,7 @@ export default function ContactoPage() {
             {/* Contact Info */}
             <div className="lg:col-span-1 space-y-6">
               <div className="p-6 bg-muted rounded-lg">
-                <h3 className="font-semibold text-lg mb-4">
+                <h3 className="font-display font-semibold text-lg mb-4">
                   Información de Contacto
                 </h3>
                 <div className="space-y-5">
@@ -118,7 +118,7 @@ export default function ContactoPage() {
               </div>
 
               <div className="p-6 bg-muted rounded-lg">
-                <h3 className="font-semibold text-lg mb-4">Síguenos</h3>
+                <h3 className="font-display font-semibold text-lg mb-4">Síguenos</h3>
                 <div className="flex gap-3">
                   {socialLinks.map((social) => (
                     <a
@@ -144,10 +144,10 @@ export default function ContactoPage() {
         <div className="container mx-auto px-4">
           <div className="rounded-lg overflow-hidden border h-[400px]">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3584.2!2d-98.2861!3d26.0925!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x866504e0e0e0e0e0%3A0x0!2sJ.+B.+Chapa+787%2C+Centro%2C+88500+Reynosa%2C+Tamps.!5e0!3m2!1ses!2smx!4v1700000000000!5m2!1ses!2smx"
+              src={`https://maps.google.com/maps?q=${encodeURIComponent("J. B. Chapa 787, Centro, 88500 Reynosa, Tamaulipas, Mexico")}&t=&z=16&ie=UTF8&iwloc=&output=embed`}
               width="100%"
               height="100%"
-              style={{ border: 0 }}
+              className="border-0"
               allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"

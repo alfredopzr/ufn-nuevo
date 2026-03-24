@@ -18,18 +18,7 @@ import { Badge } from "@/components/ui/badge";
 import { Search, Download, X, Plus } from "lucide-react";
 import { exportStudentsCSV, exportStudentsXLSX } from "@/lib/export";
 import AddStudentDialog from "@/components/admin/AddStudentDialog";
-
-const statusLabels: Record<string, string> = {
-  activo: "Activo",
-  egresado: "Egresado",
-  baja: "Baja",
-};
-
-const statusColors: Record<string, string> = {
-  activo: "bg-green-100 text-green-800",
-  egresado: "bg-blue-100 text-blue-800",
-  baja: "bg-red-100 text-red-800",
-};
+import { studentStatusConfig } from "@/lib/status";
 
 interface Props {
   students: Student[];
@@ -106,9 +95,9 @@ export default function StudentsTable({
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="all">Todos los estados</SelectItem>
-            {Object.entries(statusLabels).map(([value, label]) => (
+            {Object.entries(studentStatusConfig).map(([value, cfg]) => (
               <SelectItem key={value} value={value}>
-                {label}
+                {cfg.label}
               </SelectItem>
             ))}
           </SelectContent>
@@ -249,9 +238,9 @@ export default function StudentsTable({
                     <td className="px-4 py-3">
                       <Badge
                         variant="secondary"
-                        className={statusColors[student.status] ?? ""}
+                        className={studentStatusConfig[student.status]?.className ?? ""}
                       >
-                        {statusLabels[student.status] ?? student.status}
+                        {studentStatusConfig[student.status]?.label ?? student.status}
                       </Badge>
                     </td>
                     <td className="px-4 py-3 text-muted-foreground">

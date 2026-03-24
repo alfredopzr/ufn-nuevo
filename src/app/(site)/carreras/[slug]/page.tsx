@@ -92,7 +92,7 @@ export default function ProgramDetailPage({
               {program.duration}
             </Badge>
           </div>
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+          <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
             {program.name}
           </h1>
           <p className="text-lg text-primary-foreground/80 max-w-3xl">
@@ -178,7 +178,7 @@ export default function ProgramDetailPage({
 
               {/* Curriculum */}
               <div className="mt-12">
-                <h2 className="text-2xl font-bold mb-6">Plan de Estudios</h2>
+                <h2 className="font-display text-2xl font-bold mb-6">Plan de Estudios</h2>
                 <Accordion type="single" collapsible className="w-full">
                   {program.semesters.map((semester) => (
                     <AccordionItem

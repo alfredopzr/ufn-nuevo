@@ -8,6 +8,7 @@ interface HeroProps {
   ctaText?: string;
   ctaHref?: string;
   backgroundImage?: string;
+  imageAlt?: string;
 }
 
 export default function Hero({
@@ -16,6 +17,7 @@ export default function Hero({
   ctaText,
   ctaHref,
   backgroundImage,
+  imageAlt,
 }: HeroProps) {
   return (
     <section className="relative w-full bg-[hsl(217,71%,15%)] py-24 md:py-36 overflow-hidden">
@@ -24,7 +26,7 @@ export default function Hero({
         <>
           <Image
             src={backgroundImage}
-            alt=""
+            alt={imageAlt ?? ""}
             fill
             className="object-cover"
             priority
@@ -49,7 +51,7 @@ export default function Hero({
 
       <div className="container relative mx-auto px-4 text-center">
         <div className="w-16 h-1 rounded-full bg-secondary mx-auto mb-6" />
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
+        <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
           {title}
         </h1>
 

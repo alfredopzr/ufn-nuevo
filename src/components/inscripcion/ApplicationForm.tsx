@@ -59,6 +59,7 @@ export default function ApplicationForm({ requiredDocuments }: Props) {
           <div key={step.number} className="flex items-center">
             <button
               type="button"
+              aria-label={`Paso ${step.number}: ${step.label}`}
               onClick={() => {
                 // Only allow going back to completed steps
                 if (step.number < currentStep) setCurrentStep(step.number);
@@ -81,7 +82,7 @@ export default function ApplicationForm({ requiredDocuments }: Props) {
                   {step.number}
                 </span>
               )}
-              <span className="hidden sm:inline">{step.label}</span>
+              <span className="text-xs sm:text-sm">{step.label}</span>
             </button>
             {index < steps.length - 1 && (
               <div

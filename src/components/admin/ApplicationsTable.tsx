@@ -17,22 +17,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Search, Download, X } from "lucide-react";
 import { exportApplicationsCSV, exportApplicationsXLSX } from "@/lib/export";
-
-const statusLabels: Record<string, string> = {
-  nueva: "Nueva",
-  en_revision: "En Revisión",
-  documentos_pendientes: "Docs. Pendientes",
-  aceptada: "Aceptada",
-  rechazada: "Rechazada",
-};
-
-const statusColors: Record<string, string> = {
-  nueva: "bg-blue-100 text-blue-800",
-  en_revision: "bg-yellow-100 text-yellow-800",
-  documentos_pendientes: "bg-orange-100 text-orange-800",
-  aceptada: "bg-green-100 text-green-800",
-  rechazada: "bg-red-100 text-red-800",
-};
+import { applicationStatusConfig, getApplicationStatusLabel, getApplicationStatusClass } from "@/lib/status";
 
 interface Props {
   applications: Application[];
@@ -99,9 +84,9 @@ export default function ApplicationsTable({
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="all">Todos los estados</SelectItem>
-            {Object.entries(statusLabels).map(([value, label]) => (
+            {Object.entries(applicationStatusConfig).map(([value, cfg]) => (
               <SelectItem key={value} value={value}>
-                {label}
+                {cfg.label}
               </SelectItem>
             ))}
           </SelectContent>
@@ -155,18 +140,19 @@ export default function ApplicationsTable({
       <div className="rounded-lg border bg-white overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
+            <caption className="sr-only">Lista de solicitudes de admisión</caption>
             <thead>
               <tr className="border-b bg-muted/50">
-                <th className="px-4 py-3 text-left font-medium text-muted-foreground">
+                <th scope="col" className="px-4 py-3 text-left font-medium text-muted-foreground">
                   Nombre
                 </th>
-                <th className="px-4 py-3 text-left font-medium text-muted-foreground">
+                <th scope="col" className="px-4 py-3 text-left font-medium text-muted-foreground">
                   Programa
                 </th>
-                <th className="px-4 py-3 text-left font-medium text-muted-foreground">
+                <th scope="col" className="px-4 py-3 text-left font-medium text-muted-foreground">
                   Fecha
                 </th>
-                <th className="px-4 py-3 text-left font-medium text-muted-foreground">
+                <th scope="col" className="px-4 py-3 text-left font-medium text-muted-foreground">
                   Estado
                 </th>
               </tr>
@@ -211,9 +197,9 @@ export default function ApplicationsTable({
                     <td className="px-4 py-3">
                       <Badge
                         variant="secondary"
-                        className={statusColors[app.status] ?? ""}
+                        className={getApplicationStatusClass(app.status)}
                       >
-                        {statusLabels[app.status] ?? app.status}
+                        {getApplicationStatusLabel(app.status)}
                       </Badge>
                     </td>
                   </tr>
