@@ -4,9 +4,9 @@ export const siteConfig: SiteConfig = {
   name: "UFN",
   fullName: "Universidad Frontera Norte",
   tagline:
-    "Formando líderes con educación de calidad en Reynosa y todo Tamaulipas",
+    "Forjando el Futuro del Norte",
   description:
-    "En la Universidad Frontera Norte, nos destacamos por ser una institución dinámica, capaz de responder a los requerimientos locales, nacionales y globales. Los estudiantes encuentran una comunidad académica que fomenta el crecimiento personal y profesional.",
+    "Una educación de prestigio diseñada para los líderes del mañana. Programas académicos de vanguardia con visión global y compromiso regional.",
   sepCredential: "28PSU0198S",
   contact: {
     phones: ["899-454-6840", "899-454-6836"],
@@ -42,7 +42,6 @@ export const navigation: NavItem[] = [
 
 export const stats: StatItem[] = [
   { value: "6", label: "Programas Académicos" },
-  { value: "+XYZ", label: "Años de Experiencia" },
-  { value: "XYZ+", label: "Egresados" },
+  { value: "Reynosa, Tamaulipas", label: "Ubicacion Estratégica" },
   { value: "SEP", label: "Validez Oficial" },
 ];

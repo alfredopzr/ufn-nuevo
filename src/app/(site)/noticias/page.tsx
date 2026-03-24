@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import Hero from "@/components/sections/Hero";
+import PageHeader from "@/components/sections/PageHeader";
 import NewsCard from "@/components/ui/NewsCard";
 import { createClient } from "@/lib/supabase/server";
 
@@ -31,7 +31,7 @@ export default async function NoticiasPage() {
 
   return (
     <>
-      <Hero
+      <PageHeader
         title="Noticias y Eventos"
         subtitle="Mantente informado sobre las últimas novedades de la Universidad Frontera Norte"
       />

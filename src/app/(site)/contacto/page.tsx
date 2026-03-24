@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import Hero from "@/components/sections/Hero";
+import PageHeader from "@/components/sections/PageHeader";
 import SectionHeading from "@/components/ui/SectionHeading";
 import ContactForm from "@/components/ui/ContactForm";
 import { siteConfig } from "@/data/site";
@@ -32,7 +32,7 @@ const socialLinks = [
 export default function ContactoPage() {
   return (
     <>
-      <Hero
+      <PageHeader
         title="Contacto"
         subtitle="Estamos aquí para responder todas tus preguntas y apoyarte en tu camino académico"
       />

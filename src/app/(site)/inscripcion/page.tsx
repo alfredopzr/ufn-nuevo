@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import Hero from "@/components/sections/Hero";
+import PageHeader from "@/components/sections/PageHeader";
 import SectionHeading from "@/components/ui/SectionHeading";
 import ApplicationForm from "@/components/inscripcion/ApplicationForm";
 import { createClient } from "@/lib/supabase/server";
@@ -58,7 +58,7 @@ export default async function InscripcionPage() {
 
   return (
     <>
-      <Hero
+      <PageHeader
         title="Inscríbete en la Universidad Frontera Norte"
         subtitle="Estás a punto de ser parte del CESFN. Nuestro proceso de inscripción es sencillo y está diseñado para guiarte paso a paso."
       />

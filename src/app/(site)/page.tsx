@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Hero from "@/components/sections/Hero";
+import estudiantesImg from "@/assets/estudiantes-ufn.png";
 import StatsBar from "@/components/sections/StatsBar";
 import SectionHeading from "@/components/ui/SectionHeading";
 import ProgramCard from "@/components/ui/ProgramCard";
@@ -51,10 +52,16 @@ export default function HomePage() {
   return (
     <>
       <Hero
-        title={siteConfig.tagline}
-        subtitle="Universidad Frontera Norte — Reynosa, Tamaulipas, México"
-        ctaText="Inscríbete Ahora"
-        ctaHref="/inscripcion"
+        kicker="Liderazgo & Excelencia"
+        title="Forjando el"
+        titleEmphasis="Futuro del Norte"
+        subtitle={siteConfig.description}
+        ctaText="Explorar Carreras"
+        ctaHref="/carreras"
+        secondaryCtaText="Conoce el Campus"
+        secondaryCtaHref="/contacto"
+        imageSrc={estudiantesImg}
+        imageAlt="Estudiantes de la Universidad Frontera Norte"
       />
 
       <StatsBar />
@@ -99,7 +106,7 @@ export default function HomePage() {
         <div className="container mx-auto px-4">
           <SectionHeading
             title="¿Por qué elegir la Universidad Frontera Norte?"
-            subtitle={siteConfig.description}
+            subtitle="Una institución dinámica que responde a los requerimientos locales, nacionales y globales."
           />
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import Hero from "@/components/sections/Hero";
+import PageHeader from "@/components/sections/PageHeader";
 import SectionHeading from "@/components/ui/SectionHeading";
 import ProgramCard from "@/components/ui/ProgramCard";
 import { getProgramsByCategory } from "@/data/programs";
@@ -16,7 +16,7 @@ export default function CarrerasPage() {
 
   return (
     <>
-      <Hero
+      <PageHeader
         title="Atrévete a cruzar la frontera del conocimiento"
         subtitle="Descubre las mejores opciones de carreras universitarias en Reynosa, Tamaulipas"
       />

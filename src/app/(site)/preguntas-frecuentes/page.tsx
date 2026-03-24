@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import Hero from "@/components/sections/Hero";
+import PageHeader from "@/components/sections/PageHeader";
 import SectionHeading from "@/components/ui/SectionHeading";
 import {
   Accordion,
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export default function PreguntasFrecuentesPage() {
   return (
     <>
-      <Hero
+      <PageHeader
         title="Preguntas Frecuentes"
         subtitle="Resolvemos tus dudas sobre admisiones, costos, programas académicos y trámites"
       />
