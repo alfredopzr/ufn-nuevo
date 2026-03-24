@@ -29,18 +29,18 @@ export default function Hero({
   imageAlt = "",
 }: HeroProps) {
   return (
-    <section className="relative w-full bg-background py-24 md:py-32 lg:py-40 overflow-hidden">
+    <section className="relative w-full bg-background py-16 md:py-24 lg:py-32 overflow-hidden">
       <div className="container relative mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           {/* Text column */}
-          <div className="max-w-2xl">
+          <div className="text-center lg:text-left">
             {kicker && (
               <p className="text-sm font-semibold uppercase tracking-widest text-secondary mb-4">
                 {kicker}
               </p>
             )}
 
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
+            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
               {title}
               {titleEmphasis && (
                 <>
@@ -51,13 +51,13 @@ export default function Hero({
             </h1>
 
             {subtitle && (
-              <p className="mt-6 text-lg text-muted-foreground max-w-lg leading-relaxed">
+              <p className="mt-5 text-base sm:text-lg text-muted-foreground max-w-lg mx-auto lg:mx-0 leading-relaxed">
                 {subtitle}
               </p>
             )}
 
             {(ctaText || secondaryCtaText) && (
-              <div className="mt-10 flex flex-wrap items-center gap-4">
+              <div className="mt-8 flex flex-wrap items-center justify-center lg:justify-start gap-4">
                 {ctaText && ctaHref && (
                   <Button variant="secondary" size="lg" asChild>
                     <Link href={ctaHref}>{ctaText}</Link>
@@ -77,15 +77,15 @@ export default function Hero({
 
           {/* Image column */}
           {imageSrc && (
-            <div className="relative hidden lg:block">
-              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
+            <div className="relative">
+              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden max-w-md mx-auto lg:max-w-none">
                 <Image
                   src={imageSrc}
                   alt={imageAlt}
                   fill
                   className="object-cover"
                   priority
-                  sizes="(min-width: 1024px) 50vw, 0vw"
+                  sizes="(min-width: 1024px) 50vw, (min-width: 640px) 70vw, 95vw"
                 />
               </div>
             </div>
