@@ -28,9 +28,14 @@ export default function Footer() {
                 height={40}
                 className="h-10 w-auto"
               />
-              <h3 className="font-display text-lg font-semibold">
-                Universidad Frontera Norte
-              </h3>
+              <div>
+                <h3 className="font-display text-lg font-semibold leading-tight">
+                  {siteConfig.fullName}
+                </h3>
+                <p className="text-xs text-primary-foreground/70 leading-tight mt-0.5">
+                  {siteConfig.legalName}
+                </p>
+              </div>
             </div>
             <p className="text-sm leading-relaxed text-primary-foreground/80">
               {siteConfig.description.slice(0, 160)}...
@@ -167,8 +172,8 @@ export default function Footer() {
             </Link>
           </div>
           <p className="text-center text-sm text-primary-foreground/60">
-            &copy; {new Date().getFullYear()} Universidad Frontera Norte. Todos los derechos
-            reservados.
+            &copy; {new Date().getFullYear()} {siteConfig.legalName}. Todos los
+            derechos reservados.
           </p>
         </div>
       </div>

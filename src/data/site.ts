@@ -3,10 +3,11 @@ import { SiteConfig, NavItem, StatItem } from "@/types";
 export const siteConfig: SiteConfig = {
   name: "UFN",
   fullName: "Universidad Frontera Norte",
+  legalName: "Centro de Estudios Superiores Frontera Norte",
   tagline:
     "Forjando el Futuro del Norte",
   description:
-    "Una educación de prestigio diseñada para los líderes del mañana. Programas académicos de vanguardia con visión global y compromiso regional.",
+    "Gestionamos tu formación profesional y te acompañamos de principio a fin en tu aprendizaje, garantizando la calidad educativa que requieres para afrontar de manera proactiva los retos de la vida.",
   sepCredential: "28PSU0198S",
   contact: {
     phones: ["899-454-6840", "899-454-6836"],

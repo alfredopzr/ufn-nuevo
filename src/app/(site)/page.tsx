@@ -10,15 +10,23 @@ import { siteConfig } from "@/data/site";
 import SocialFeed from "@/components/sections/SocialFeed";
 import FechasImportantes from "@/components/sections/FechasImportantes";
 import Testimonials from "@/components/sections/Testimonials";
+import MisionVision from "@/components/sections/MisionVision";
+import Valores from "@/components/sections/Valores";
 import {
-  GraduationCap,
+  HeartHandshake,
   Users,
-  Building2,
+  GraduationCap,
   MapPin,
   ArrowRight,
 } from "lucide-react";
 
 const features = [
+  {
+    icon: HeartHandshake,
+    title: "Servicio Personalizado",
+    description:
+      "Marcamos la diferencia acompañándote de principio a fin en tu aprendizaje. Creemos en ti y valoramos tu esfuerzo.",
+  },
   {
     icon: GraduationCap,
     title: "Calidad Académica",
@@ -30,12 +38,6 @@ const features = [
     title: "Comunidad Académica",
     description:
       "Los estudiantes encuentran una comunidad académica que fomenta el crecimiento personal y profesional.",
-  },
-  {
-    icon: Building2,
-    title: "Preparación Profesional",
-    description:
-      "Institución dinámica, capaz de responder a los requerimientos locales, nacionales y globales del mercado laboral.",
   },
   {
     icon: MapPin,
@@ -65,6 +67,9 @@ export default function HomePage() {
       />
 
       <StatsBar />
+
+      {/* Misión y Visión */}
+      <MisionVision />
 
       {/* Fechas Importantes Section */}
       <FechasImportantes />
@@ -106,7 +111,7 @@ export default function HomePage() {
         <div className="container mx-auto px-4">
           <SectionHeading
             title="¿Por qué elegir la Universidad Frontera Norte?"
-            subtitle="Una institución dinámica que responde a los requerimientos locales, nacionales y globales."
+            subtitle="Marcamos la diferencia con nuestro servicio personalizado. Al creer en ti y valorar tu esfuerzo, te conviertes en parte de este proyecto educativo que busca una transformación social en beneficio de nuestra ciudad."
           />
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -129,6 +134,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Valores Section */}
+      <Valores />
 
       {/* Testimonials Section */}
       <Testimonials />

@@ -24,6 +24,7 @@ export interface Semester {
 export interface SiteConfig {
   name: string;
   fullName: string;
+  legalName: string;
   tagline: string;
   description: string;
   sepCredential: string;
