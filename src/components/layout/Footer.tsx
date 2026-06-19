@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 import { siteConfig, navigation } from "@/data/site";
 import { programs } from "@/data/programs";
-import cesfnLogo from "@/assets/cesfn-logo-84px.png";
+import nuevoLogo from "@/assets/nuevo-logo.jpg";
 
 export default function Footer() {
   return (
@@ -23,10 +23,10 @@ export default function Footer() {
           <div className="space-y-4">
             <div className="flex items-center gap-3">
               <Image
-                src={cesfnLogo}
-                alt="CESFN Logo"
-                height={40}
-                className="h-10 w-auto"
+                src={nuevoLogo}
+                alt="Universidad Frontera Norte"
+                height={64}
+                className="h-16 w-auto shrink-0"
               />
               <div>
                 <h3 className="font-display text-lg font-semibold leading-tight">

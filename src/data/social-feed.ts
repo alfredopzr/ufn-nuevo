@@ -6,6 +6,8 @@ export const instagramPosts: string[] = [
   "https://www.instagram.com/p/DSI4BHqERGI/",
   "https://www.instagram.com/p/DPzwqAGkROR/",
   "https://www.instagram.com/p/DOhXT23kRpU/?img_index=1",
+  "https://www.instagram.com/p/DY8ELXoSQ7M/",
+
 ];
 
 // Paste the full <iframe ...></iframe> embed code from Facebook for each post.

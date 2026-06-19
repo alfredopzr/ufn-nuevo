@@ -7,11 +7,10 @@ import SectionHeading from "@/components/ui/SectionHeading";
 import ProgramCard from "@/components/ui/ProgramCard";
 import { getProgramsByCategory } from "@/data/programs";
 import { siteConfig } from "@/data/site";
-import SocialFeed from "@/components/sections/SocialFeed";
 import FechasImportantes from "@/components/sections/FechasImportantes";
-import Testimonials from "@/components/sections/Testimonials";
-import MisionVision from "@/components/sections/MisionVision";
 import Valores from "@/components/sections/Valores";
+import SocialFeed from "@/components/sections/SocialFeed";
+import Partners from "@/components/sections/Partners";
 import {
   HeartHandshake,
   Users,
@@ -68,12 +67,6 @@ export default function HomePage() {
 
       <StatsBar />
 
-      {/* Misión y Visión */}
-      <MisionVision />
-
-      {/* Fechas Importantes Section */}
-      <FechasImportantes />
-
       {/* Programs Section */}
       <section className="py-16 md:py-24 bg-background">
         <div className="container mx-auto px-4">
@@ -106,6 +99,9 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Fechas Importantes Section */}
+      <FechasImportantes />
+
       {/* Why UFN Section */}
       <section className="py-16 md:py-24 bg-muted">
         <div className="container mx-auto px-4">
@@ -136,16 +132,13 @@ export default function HomePage() {
       </section>
 
       {/* Valores Section */}
-      <Valores />
-
-      {/* Testimonials Section */}
-      <Testimonials />
-
-      {/* Campus Gallery Section */}
-      {/* <CampusGallery /> */}
+      {/* <Valores /> */}
 
       {/* Social Feed Section */}
       <SocialFeed />
+
+      {/* Partners Section */}
+      {/* <Partners /> */}
 
       {/* CTA Section */}
       <section className="py-16 md:py-24 bg-primary text-primary-foreground">

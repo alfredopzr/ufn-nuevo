@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { siteConfig } from "@/data/site";
+import logoIcon from "@/assets/nuevo-logo.jpg";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -30,6 +31,11 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
+  },
+  icons: {
+    icon: [{ url: logoIcon.src, type: "image/jpeg" }],
+    shortcut: [{ url: logoIcon.src, type: "image/jpeg" }],
+    apple: [{ url: logoIcon.src, type: "image/jpeg" }],
   },
 };
 

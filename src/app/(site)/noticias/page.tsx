@@ -1,6 +1,8 @@
 import { Metadata } from "next";
 import PageHeader from "@/components/sections/PageHeader";
 import NewsCard from "@/components/ui/NewsCard";
+import Testimonials from "@/components/sections/Testimonials";
+import SocialFeed from "@/components/sections/SocialFeed";
 import { createClient } from "@/lib/supabase/server";
 
 export const metadata: Metadata = {
@@ -53,6 +55,9 @@ export default async function NoticiasPage() {
           )}
         </div>
       </section>
+
+      <Testimonials />
+      <SocialFeed />
     </>
   );
 }

@@ -15,7 +15,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   ArrowRight,
   Clock,
-  BookOpen,
   UserCheck,
   GraduationCap,
   Briefcase,
@@ -107,10 +106,10 @@ export default function ProgramDetailPage({
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             {/* Main Content */}
             <div className="lg:col-span-2">
-              <Tabs defaultValue="descripcion" className="w-full">
+              <Tabs defaultValue="plan-estudio" className="w-full">
                 <TabsList className="grid w-full grid-cols-2 md:grid-cols-4">
-                  <TabsTrigger value="descripcion" className="text-xs md:text-sm">
-                    Descripción
+                  <TabsTrigger value="plan-estudio" className="text-xs md:text-sm">
+                    Plan de Estudio
                   </TabsTrigger>
                   <TabsTrigger value="ingreso" className="text-xs md:text-sm">
                     Perfil de Ingreso
@@ -122,18 +121,40 @@ export default function ProgramDetailPage({
                     Campo Laboral
                   </TabsTrigger>
                 </TabsList>
-                <TabsContent value="descripcion" className="mt-6">
-                  <div className="flex items-start gap-4 p-6 bg-muted rounded-lg">
-                    <BookOpen className="w-6 h-6 text-primary mt-1 shrink-0" />
-                    <div>
-                      <h3 className="font-semibold text-lg mb-2">
-                        Descripción General
-                      </h3>
-                      <p className="text-muted-foreground leading-relaxed">
-                        {program.description}
-                      </p>
-                    </div>
-                  </div>
+                <TabsContent value="plan-estudio" className="mt-6">
+                  <Accordion type="single" collapsible className="w-full">
+                    {program.semesters.map((semester) => (
+                      <AccordionItem
+                        key={semester.number}
+                        value={`semester-${semester.number}`}
+                      >
+                        <AccordionTrigger className="text-base">
+                          <span className="flex items-center gap-2">
+                            <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-primary text-primary-foreground text-sm font-medium">
+                              {semester.number}
+                            </span>
+                            Cuatrimestre {semester.number}
+                            <span className="text-muted-foreground text-sm ml-2">
+                              ({semester.subjects.length} materias)
+                            </span>
+                          </span>
+                        </AccordionTrigger>
+                        <AccordionContent>
+                          <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 pt-2">
+                            {semester.subjects.map((subject) => (
+                              <li
+                                key={subject}
+                                className="flex items-center gap-2 text-muted-foreground"
+                              >
+                                <div className="w-1.5 h-1.5 rounded-full bg-secondary shrink-0" />
+                                {subject}
+                              </li>
+                            ))}
+                          </ul>
+                        </AccordionContent>
+                      </AccordionItem>
+                    ))}
+                  </Accordion>
                 </TabsContent>
                 <TabsContent value="ingreso" className="mt-6">
                   <div className="flex items-start gap-4 p-6 bg-muted rounded-lg">
@@ -175,44 +196,6 @@ export default function ProgramDetailPage({
                   </div>
                 </TabsContent>
               </Tabs>
-
-              {/* Curriculum */}
-              <div className="mt-12">
-                <h2 className="font-display text-2xl font-bold mb-6">Plan de Estudios</h2>
-                <Accordion type="single" collapsible className="w-full">
-                  {program.semesters.map((semester) => (
-                    <AccordionItem
-                      key={semester.number}
-                      value={`semester-${semester.number}`}
-                    >
-                      <AccordionTrigger className="text-base">
-                        <span className="flex items-center gap-2">
-                          <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-primary text-primary-foreground text-sm font-medium">
-                            {semester.number}
-                          </span>
-                          Cuatrimestre {semester.number}
-                          <span className="text-muted-foreground text-sm ml-2">
-                            ({semester.subjects.length} materias)
-                          </span>
-                        </span>
-                      </AccordionTrigger>
-                      <AccordionContent>
-                        <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 pt-2">
-                          {semester.subjects.map((subject) => (
-                            <li
-                              key={subject}
-                              className="flex items-center gap-2 text-muted-foreground"
-                            >
-                              <div className="w-1.5 h-1.5 rounded-full bg-secondary shrink-0" />
-                              {subject}
-                            </li>
-                          ))}
-                        </ul>
-                      </AccordionContent>
-                    </AccordionItem>
-                  ))}
-                </Accordion>
-              </div>
             </div>
 
             {/* Sidebar */}

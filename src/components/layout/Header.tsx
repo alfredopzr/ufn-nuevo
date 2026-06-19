@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu } from "lucide-react";
-import cesfnLogo from "@/assets/cesfn-logo-84px.png";
+import nuevoLogo from "@/assets/nuevo-logo.jpg";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -38,17 +38,15 @@ export default function Header() {
         scrolled && "shadow-md"
       )}
     >
-      <div className="container mx-auto flex h-16 items-center justify-between px-4 lg:px-8">
+      <div className="container mx-auto flex h-20 items-center justify-between px-4 lg:px-8">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2">
-          <div className="flex items-center justify-center rounded-md bg-primary px-2 py-1">
-            <Image
-              src={cesfnLogo}
-              alt="CESFN Logo"
-              height={32}
-              className="h-8 w-auto"
-            />
-          </div>
+        <Link href="/" className="flex items-center gap-3">
+          <Image
+            src={nuevoLogo}
+            alt="Universidad Frontera Norte"
+            height={56}
+            className="h-14 w-auto"
+          />
           <span className="text-lg font-semibold text-primary sm:text-xl">
             Universidad Frontera Norte
           </span>

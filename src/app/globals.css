@@ -62,9 +62,23 @@
   animation: hero-float-slow 8s ease-in-out infinite;
 }
 
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee linear infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-hero-float,
-  .animate-hero-float-slow {
+  .animate-hero-float-slow,
+  .animate-marquee {
     animation: none;
   }
 }
