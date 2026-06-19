@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="80" viewBox="0 0 200 80" role="img" aria-label="Parque Eólico Reynosa">
+  <rect width="200" height="80" rx="8" fill="#f1f5f9"/>
+  <text x="100" y="36" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#334155">Parque Eólico</text>
+  <text x="100" y="52" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#334155">Reynosa</text>
+</svg>

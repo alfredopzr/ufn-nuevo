@@ -2,15 +2,13 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Hero from "@/components/sections/Hero";
 import estudiantesImg from "@/assets/estudiantes-ufn.png";
-import StatsBar from "@/components/sections/StatsBar";
 import SectionHeading from "@/components/ui/SectionHeading";
 import ProgramCard from "@/components/ui/ProgramCard";
 import { getProgramsByCategory } from "@/data/programs";
 import { siteConfig } from "@/data/site";
 import FechasImportantes from "@/components/sections/FechasImportantes";
-// import Valores from "@/components/sections/Valores";
 import SocialFeed from "@/components/sections/SocialFeed";
-// import Partners from "@/components/sections/Partners";
+import Partners from "@/components/sections/Partners";
 import {
   HeartHandshake,
   Users,
@@ -65,10 +63,12 @@ export default function HomePage() {
         imageAlt="Estudiantes de la Universidad Frontera Norte"
       />
 
-      <StatsBar />
+      {/* <StatsBar /> */}
+      
+      <Partners />
 
       {/* Programs Section */}
-      <section className="py-10 md:py-24 bg-background">
+      <section className="py-10 md:py-14 bg-background">
         <div className="container mx-auto px-4">
           <SectionHeading
             title="Nuestras Carreras"
@@ -103,7 +103,7 @@ export default function HomePage() {
       <FechasImportantes />
 
       {/* Why UFN Section */}
-      <section className="py-10 md:py-24 bg-muted">
+      <section className="py-10 md:py-14 bg-muted">
         <div className="container mx-auto px-4">
           <SectionHeading
             title="¿Por qué elegir la Universidad Frontera Norte?"
@@ -140,11 +140,8 @@ export default function HomePage() {
       {/* Social Feed Section */}
       <SocialFeed />
 
-      {/* Partners Section */}
-      {/* <Partners /> */}
-
       {/* CTA Section */}
-      <section className="py-16 md:py-24 bg-primary text-primary-foreground">
+      <section className="py-12 md:py-16 bg-primary text-primary-foreground">
         <div className="container mx-auto px-4 text-center">
           <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
             Inicia tu futuro hoy

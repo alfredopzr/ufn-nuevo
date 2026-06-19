@@ -16,7 +16,7 @@ export default function SectionHeading({
   return (
     <div
       className={cn(
-        "mb-8 md:mb-14",
+        "mb-6 md:mb-10",
         centered && "text-center",
         !centered && "text-left",
         className,

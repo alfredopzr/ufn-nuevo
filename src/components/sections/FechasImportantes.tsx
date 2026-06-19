@@ -25,7 +25,7 @@ export default async function FechasImportantes() {
   }
 
   return (
-    <section className="py-16 md:py-24 bg-muted">
+    <section className="py-10 md:py-14 bg-muted">
       <div className="container mx-auto px-4">
         <SectionHeading
           title="Fechas Importantes"

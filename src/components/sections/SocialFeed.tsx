@@ -85,7 +85,7 @@ export default function SocialFeed() {
   if (!hasInstagram && !hasFacebook) return null;
 
   return (
-    <section className="py-16 md:py-24 bg-muted/40">
+    <section className="py-10 md:py-14 bg-muted/40">
       <div className="container mx-auto px-4">
         <SectionHeading
           title="Síguenos en Redes"

@@ -31,7 +31,7 @@ export const siteConfig: SiteConfig = {
     googleMapsUrl: "https://goo.gl/maps/YdXZAmDUrpvgPHbR8",
   },
   enrollment: {
-    googleFormUrl: "",
+    googleFormUrl: "https://forms.gle/6Yi3dZfw4prwsoQb6",
   },
 };
 
