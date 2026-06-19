@@ -30,6 +30,9 @@ export const siteConfig: SiteConfig = {
     full: "J. B. Chapa 787 y Colón, Centro, Reynosa, Tamaulipas, C.P. 88500, México",
     googleMapsUrl: "https://goo.gl/maps/YdXZAmDUrpvgPHbR8",
   },
+  enrollment: {
+    googleFormUrl: "",
+  },
 };
 
 export const navigation: NavItem[] = [
@@ -43,6 +46,10 @@ export const navigation: NavItem[] = [
 
 export const stats: StatItem[] = [
   { value: "6", label: "Programas Académicos" },
-  { value: "Reynosa, Tamaulipas", label: "Ubicacion Estratégica" },
+  {
+    value: "Reynosa, Tamaulipas",
+    mobileValue: "Reynosa",
+    label: "Ubicacion Estratégica",
+  },
   { value: "SEP", label: "Validez Oficial" },
 ];

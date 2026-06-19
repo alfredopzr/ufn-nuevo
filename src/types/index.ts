@@ -31,6 +31,12 @@ export interface SiteConfig {
   contact: ContactInfo;
   social: SocialLinks;
   address: Address;
+  enrollment: EnrollmentConfig;
+}
+
+export interface EnrollmentConfig {
+  /** Google Forms URL for the enrollment application */
+  googleFormUrl: string;
 }
 
 export interface ContactInfo {
@@ -65,6 +71,7 @@ export interface NavItem {
 export interface StatItem {
   value: string;
   label: string;
+  mobileValue?: string;
 }
 
 export interface NewsArticle {

@@ -8,9 +8,9 @@ import ProgramCard from "@/components/ui/ProgramCard";
 import { getProgramsByCategory } from "@/data/programs";
 import { siteConfig } from "@/data/site";
 import FechasImportantes from "@/components/sections/FechasImportantes";
-import Valores from "@/components/sections/Valores";
+// import Valores from "@/components/sections/Valores";
 import SocialFeed from "@/components/sections/SocialFeed";
-import Partners from "@/components/sections/Partners";
+// import Partners from "@/components/sections/Partners";
 import {
   HeartHandshake,
   Users,
@@ -68,18 +68,18 @@ export default function HomePage() {
       <StatsBar />
 
       {/* Programs Section */}
-      <section className="py-16 md:py-24 bg-background">
+      <section className="py-10 md:py-24 bg-background">
         <div className="container mx-auto px-4">
           <SectionHeading
             title="Nuestras Carreras"
             subtitle="Descubre las mejores opciones de carreras universitarias en Reynosa, Tamaulipas"
           />
 
-          <div className="mb-10">
-            <h3 className="text-xl font-semibold text-foreground mb-6">
+          <div className="mb-8 md:mb-10">
+            <h3 className="text-lg md:text-xl font-semibold text-foreground mb-4 md:mb-6">
               Licenciaturas
             </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
               {licenciaturas.map((program) => (
                 <ProgramCard key={program.slug} program={program} />
               ))}
@@ -87,10 +87,10 @@ export default function HomePage() {
           </div>
 
           <div>
-            <h3 className="text-xl font-semibold text-foreground mb-6">
+            <h3 className="text-lg md:text-xl font-semibold text-foreground mb-4 md:mb-6">
               Ingenierías
             </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
               {ingenierias.map((program) => (
                 <ProgramCard key={program.slug} program={program} />
               ))}
@@ -103,25 +103,28 @@ export default function HomePage() {
       <FechasImportantes />
 
       {/* Why UFN Section */}
-      <section className="py-16 md:py-24 bg-muted">
+      <section className="py-10 md:py-24 bg-muted">
         <div className="container mx-auto px-4">
           <SectionHeading
             title="¿Por qué elegir la Universidad Frontera Norte?"
             subtitle="Marcamos la diferencia con nuestro servicio personalizado. Al creer en ti y valorar tu esfuerzo, te conviertes en parte de este proyecto educativo que busca una transformación social en beneficio de nuestra ciudad."
+            className="[&_p]:line-clamp-3 [&_p]:md:line-clamp-none"
           />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-6">
             {features.map((feature) => (
               <div
                 key={feature.title}
-                className="flex items-start gap-5 p-6 rounded-lg bg-background shadow-sm border-l-4 border-primary transition-all duration-200 hover:shadow-md"
+                className="flex items-start gap-3 md:gap-5 p-4 md:p-6 rounded-lg bg-background shadow-sm border-l-4 border-primary transition-all duration-200 hover:shadow-md"
               >
-                <div className="flex items-center justify-center w-14 h-14 rounded-full bg-primary/10 text-primary shrink-0">
-                  <feature.icon className="w-7 h-7" />
+                <div className="flex items-center justify-center w-10 h-10 md:w-14 md:h-14 rounded-full bg-primary/10 text-primary shrink-0">
+                  <feature.icon className="w-5 h-5 md:w-7 md:h-7" />
                 </div>
-                <div>
-                  <h4 className="font-semibold text-lg mb-1">{feature.title}</h4>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
+                <div className="min-w-0">
+                  <h4 className="font-semibold text-sm md:text-lg mb-0.5 md:mb-1">
+                    {feature.title}
+                  </h4>
+                  <p className="text-muted-foreground text-xs md:text-sm leading-relaxed">
                     {feature.description}
                   </p>
                 </div>

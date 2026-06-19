@@ -21,9 +21,9 @@ export default function CarrerasPage() {
         subtitle="Descubre las mejores opciones de carreras universitarias en Reynosa, Tamaulipas"
       />
 
-      <section className="py-16 md:py-24">
+      <section className="py-8 md:py-24">
         <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center mb-16">
+          <div className="hidden md:block max-w-3xl mx-auto text-center mb-16">
             <p className="text-lg text-muted-foreground">
               En la Universidad Frontera Norte, nuestro compromiso es ofrecer a
               los estudiantes una experiencia educativa enriquecedora y completa.
@@ -33,12 +33,13 @@ export default function CarrerasPage() {
             </p>
           </div>
 
-          <div className="mb-16">
+          <div className="mb-10 md:mb-16">
             <SectionHeading
               title="Licenciaturas"
               subtitle="Programas de formación profesional en administración, comercio y logística"
+              centered={false}
             />
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
               {licenciaturas.map((program) => (
                 <ProgramCard key={program.slug} program={program} />
               ))}
@@ -49,8 +50,9 @@ export default function CarrerasPage() {
             <SectionHeading
               title="Ingenierías"
               subtitle="Programas de formación técnica y tecnológica de alto nivel"
+              centered={false}
             />
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
               {ingenierias.map((program) => (
                 <ProgramCard key={program.slug} program={program} />
               ))}

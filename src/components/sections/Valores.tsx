@@ -1,27 +1,19 @@
 import {
-  Sparkles,
-  Scale,
-  Compass,
-  Handshake,
-  Award,
-  ShieldCheck,
-  Heart,
-  Users,
   Target,
   Eye,
 } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
 
-const valores = [
-  { icon: Sparkles, label: "Aptitud" },
-  { icon: Scale, label: "Ética" },
-  { icon: Compass, label: "Liderazgo" },
-  { icon: Handshake, label: "Compromiso" },
-  { icon: Award, label: "Calidad" },
-  { icon: ShieldCheck, label: "Responsabilidad" },
-  { icon: Heart, label: "Empatía" },
-  { icon: Users, label: "Colaboración" },
-];
+// const valores = [
+//   { icon: Sparkles, label: "Aptitud" },
+//   { icon: Scale, label: "Ética" },
+//   { icon: Compass, label: "Liderazgo" },
+//   { icon: Handshake, label: "Compromiso" },
+//   { icon: Award, label: "Calidad" },
+//   { icon: ShieldCheck, label: "Responsabilidad" },
+//   { icon: Heart, label: "Empatía" },
+//   { icon: Users, label: "Colaboración" },
+// ];
 
 export default function Valores() {
   return (

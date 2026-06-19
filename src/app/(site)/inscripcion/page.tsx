@@ -1,17 +1,15 @@
 import { Metadata } from "next";
 import PageHeader from "@/components/sections/PageHeader";
 import SectionHeading from "@/components/ui/SectionHeading";
-import ApplicationForm from "@/components/inscripcion/ApplicationForm";
-import { createClient } from "@/lib/supabase/server";
+import GoogleFormGuide from "@/components/inscripcion/GoogleFormGuide";
 import { siteConfig } from "@/data/site";
 import {
-  ClipboardList,
-  CheckCircle2,
-  FileText,
+  ExternalLink,
   GraduationCap,
   Phone,
   MessageCircle,
   MapPin,
+  Clock,
 } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -22,22 +20,16 @@ export const metadata: Metadata = {
 
 const steps = [
   {
-    icon: ClipboardList,
-    title: "Llena el Formulario",
+    icon: ExternalLink,
+    title: "Completar Formulario",
     description:
-      "Completa el formulario de inscripción con tu información personal y académica.",
+      "Accede a nuestro formulario en línea y envía tu solicitud de inscripción.",
   },
   {
-    icon: FileText,
-    title: "Sube tus Documentos",
+    icon: Clock,
+    title: "Espera Nuestro Contacto",
     description:
-      "Adjunta los documentos requeridos directamente desde tu dispositivo.",
-  },
-  {
-    icon: CheckCircle2,
-    title: "Recibe Confirmación",
-    description:
-      "Nuestro equipo revisará tu solicitud y te contactará para confirmar tu inscripción.",
+      "Una vez recibida tu solicitud, nuestro equipo de admisiones se pondrá en contacto contigo.",
   },
   {
     icon: GraduationCap,
@@ -48,13 +40,12 @@ const steps = [
 ];
 
 export default async function InscripcionPage() {
-  // Fetch active required documents from Supabase
-  const supabase = createClient();
-  const { data: requiredDocuments } = await supabase
-    .from("required_documents")
-    .select("*")
-    .eq("activo", true)
-    .order("created_at", { ascending: true });
+  // const supabase = createClient();
+  // const { data: requiredDocuments } = await supabase
+  //   .from("required_documents")
+  //   .select("*")
+  //   .eq("activo", true)
+  //   .order("created_at", { ascending: true });
 
   return (
     <>
@@ -71,13 +62,15 @@ export default async function InscripcionPage() {
             subtitle="Sigue estos sencillos pasos para formar parte de nuestra comunidad universitaria"
           />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="mx-auto grid w-full max-w-5xl grid-cols-1 gap-8 md:grid-cols-3">
             {steps.map((step, index) => (
               <div key={step.title} className="relative text-center">
                 <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary text-primary-foreground mb-4">
                   <step.icon className="w-8 h-8" />
                 </div>
-                <div className="absolute top-8 left-1/2 w-full h-px bg-border hidden lg:block -z-10" />
+                {index < steps.length - 1 && (
+                  <div className="absolute top-8 left-1/2 hidden h-px w-full bg-border md:block -z-10" />
+                )}
                 <span className="inline-block bg-secondary text-secondary-foreground text-xs font-bold px-2 py-1 rounded-full mb-2">
                   Paso {index + 1}
                 </span>
@@ -91,17 +84,22 @@ export default async function InscripcionPage() {
         </div>
       </section>
 
-      {/* Form Section */}
+      {/* Google Form Section */}
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             <div className="lg:col-span-2">
               <SectionHeading
                 title="Solicitud de Inscripción"
-                subtitle="Agradecemos que por favor nos proporciones tu información completa para poder darte un mejor servicio."
+                subtitle="Completa el formulario en línea para iniciar tu proceso de admisión."
                 centered={false}
               />
-              <ApplicationForm requiredDocuments={requiredDocuments ?? []} />
+              <GoogleFormGuide
+                googleFormUrl={siteConfig.enrollment.googleFormUrl}
+              />
+              {/* <ApplicationForm
+                requiredDocuments={requiredDocuments ?? []}
+              /> */}
             </div>
 
             <div className="lg:col-span-1">
