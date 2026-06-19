@@ -27,7 +27,7 @@ export const programs: Program[] = [
     heroImage: imgAdminHero,
     duration: "9 Cuatrimestres",
     description:
-      "Formar líderes administrativos con conocimientos conceptuales y prácticos para gestionar recursos eficientemente y formular estrategias competitivas con ética profesional.",
+      "Licenciatura de nueve cuatrimestres que integra administración, contabilidad, finanzas, derecho mercantil y laboral, impuestos y gestión de personal en un solo plan de estudios. A lo largo del programa se abordan la administración de la producción, el análisis financiero, la evaluación de proyectos de inversión, la administración de PYMES y la planeación estratégica. Incluye formación en francés, inglés y humanística para complementar la visión gerencial del egresado.",
     perfilIngreso:
       "Interés en negocios, habilidades para el trabajo en equipo, comunicación efectiva, pensamiento analítico, proactividad, y compromiso con la administración.",
     perfilEgreso:
@@ -147,7 +147,7 @@ export const programs: Program[] = [
     heroImage: imgComercioHero,
     duration: "9 Cuatrimestres",
     description:
-      "Formar expertos en comercio internacional capaces de analizar mercados, negociar en contextos multiculturales, manejar logística y operaciones aduaneras, con un enfoque emprendedor y socialmente responsable.",
+      "Licenciatura orientada al comercio entre países, que combina administración, contabilidad y finanzas con el estudio del marco legal aduanero, fiscal y mercantil aplicado a operaciones de importación y exportación. El plan profundiza en mercadotecnia global e internacional, logística comercial, tratados y acuerdos comerciales, organismos internacionales y evaluación de proyectos de inversión. La formación incluye francés e inglés, con énfasis en el análisis de mercados y la estrategia comercial en contextos multiculturales.",
     perfilIngreso:
       "Conocimientos en administración, derecho, economía, inglés, y análisis socioeconómico. Apertura al cambio y trabajo en equipo.",
     perfilEgreso:
@@ -270,7 +270,7 @@ export const programs: Program[] = [
     heroImage: imgLogisticaHero,
     duration: "9 Cuatrimestres",
     description:
-      "Formar expertos en logística con habilidades en administración, finanzas, y comercio internacional, aptos para identificar oportunidades de mercado y gestionar operaciones de importación-exportación con un enfoque multicultural.",
+      "Licenciatura centrada en la cadena de suministro y el movimiento de mercancías, con bases en administración, contabilidad, finanzas y comercio exterior. El plan de estudios desarrolla competencias en logística geográfica y de mercados, transporte y tráfico, almacenamiento y centros de distribución, embalaje, logística inversa y procedimientos del sistema aduanal. A diferencia del enfoque comercial de Comercio Internacional, aquí el énfasis está en la planeación y optimización operativa de la cadena logística.",
     perfilIngreso:
       "Conocimientos en administración, derecho, economía, investigación, e inglés. Interés en el entorno socioeconómico y político global, capacidad de análisis y trabajo en equipo.",
     perfilEgreso:
@@ -395,7 +395,7 @@ export const programs: Program[] = [
     heroImage: imgIndustrialAlt,
     duration: "9 Cuatrimestres",
     description:
-      "Formar ingenieros con excelencia en competencias profesionales, enfocados en la planeación y operación de sistemas de producción y recursos humanos.",
+      "Ingeniería de nueve cuatrimestres que une formación técnica en producción y manufactura con administración empresarial. El plan abarca investigación de operaciones, control de calidad, procesos de manufactura, instrumentación industrial, diseño de planta y ergonomía, junto con gestión de personal, contabilidad de costos, finanzas y cadena de suministros. Es un programa híbrido pensado para quien busca optimizar sistemas productivos desde una perspectiva tanto de ingeniería como de gestión.",
     perfilIngreso:
       "Hábitos de estudio para aprendizaje autónomo, pensamiento crítico, trabajo colaborativo, y organización del tiempo. Conocimientos básicos en matemáticas, estadística, computación, investigación, e inglés. Capacidad de análisis y adaptación a ambientes multiculturales.",
     perfilEgreso:
@@ -520,7 +520,7 @@ export const programs: Program[] = [
     heroImage: imgSistemasHero,
     duration: "9 Cuatrimestres",
     description:
-      "Formar ingenieros excelentes en competencias profesionales y personales, enfocados en desarrollar, implementar y automatizar sistemas tecnológicos, con una visión emprendedora y sustentable.",
+      "Ingeniería enfocada en el diseño, desarrollo e implementación de soluciones computacionales. El plan integra programación, estructuras de datos, arquitectura de computadoras, bases de datos, redes, telecomunicaciones, sistemas operativos, inteligencia artificial y seguridad informática, con fundamentos sólidos en matemáticas e ingeniería. También incluye formación en administración, costos y evaluación de proyectos para vincular el desarrollo tecnológico con las necesidades de las organizaciones.",
     perfilIngreso:
       "Conocimientos en investigación, matemáticas, estadística, computación e inglés. Habilidades para el razonamiento lógico, trabajo en equipo, y adaptación a ambientes multiculturales.",
     perfilEgreso:
@@ -639,7 +639,7 @@ export const programs: Program[] = [
     heroImage: imgElectronicaHero,
     duration: "9 Cuatrimestres",
     description:
-      "Formar ingenieros excelentes en su campo, con un enfoque emprendedor, ético y social. Capacitar para identificar y explotar oportunidades empresariales.",
+      "Ingeniería dedicada a sistemas electrónicos, eléctricos y de comunicaciones aplicados a entornos industriales. El plan abarca circuitos eléctricos, electrónica analógica y digital, electromagnetismo, transmisión de datos, teoría de comunicaciones, instrumentación, electrónica de potencia y sistemas de microondas, con apoyo en programación y diseño asistido por computadora. La formación incluye bases en matemáticas, física e inglés, orientadas al análisis y diseño de equipos y sistemas electrónicos en la industria.",
     perfilIngreso:
       "Conocimientos en matemáticas, estadística, computación, e inglés. Habilidades en razonamiento lógico, trabajo en equipo, y autodidactismo.",
     perfilEgreso:
